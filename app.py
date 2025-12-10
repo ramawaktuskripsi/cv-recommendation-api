@@ -57,45 +57,36 @@ except LookupError:
     nltk.download('stopwords')
 
 # ============================================
-# SKILL TAXONOMY
+# COMMON SYNONYMS (Minimal - for variations)
 # ============================================
 
-SKILL_TAXONOMY = {
-    "textile": [
-        "spinning", "weaving", "knitting", "dyeing", "finishing",
-        "quality control", "textile testing", "fabric inspection",
-        "color matching", "pattern making", "garment construction"
-    ],
-    "manufacturing": [
-        "lean manufacturing", "six sigma", "production planning",
-        "inventory management", "quality assurance", "iso 9001",
-        "5s", "kaizen", "preventive maintenance"
-    ],
-    "tools": [
-        "microsoft excel", "microsoft office", "erp system",
-        "cad", "autocad", "sap", "oracle"
-    ],
-    "soft_skills": [
-        "leadership", "teamwork", "communication", "problem solving",
-        "time management", "project management"
-    ]
-}
-
-ALL_SKILLS = []
-for category, skills in SKILL_TAXONOMY.items():
-    ALL_SKILLS.extend(skills)
-
-# ============================================
-# SYNONYM MAPPING
-# ============================================
-
-SYNONYMS = {
-    "excel": ["microsoft excel", "ms excel", "spreadsheet"],
-    "word": ["microsoft word", "ms word"],
-    "powerpoint": ["microsoft powerpoint", "ms powerpoint", "ppt"],
-    "quality control": ["qc", "quality assurance", "qa"],
-    "leadership": ["team leadership", "people management", "supervisi"],
+# Hanya common variations yang sering muncul
+# Tidak perlu maintain semua skills - skills diambil dari required_skills di request
+COMMON_SYNONYMS = {
+    # Office Tools
+    "excel": ["microsoft excel", "ms excel", "spreadsheet", "excel spreadsheet"],
+    "word": ["microsoft word", "ms word", "word processing"],
+    "powerpoint": ["microsoft powerpoint", "ms powerpoint", "ppt", "presentation"],
+    "office": ["microsoft office", "ms office"],
+    
+    # Quality & Manufacturing
+    "quality control": ["qc", "quality assurance", "qa", "quality inspector", "quality checker"],
     "lean manufacturing": ["lean", "lean production", "5s", "kaizen"],
+    "six sigma": ["6 sigma", "six-sigma", "6-sigma"],
+    
+    # Leadership & Soft Skills
+    "leadership": ["team leadership", "people management", "team lead", "team leader", "supervisi"],
+    "communication": ["komunikasi", "interpersonal skills"],
+    "problem solving": ["problem-solving", "analytical thinking", "critical thinking"],
+    
+    # Technical
+    "autocad": ["auto cad", "auto-cad", "cad"],
+    "sap": ["sap erp", "sap system"],
+    "erp": ["erp system", "enterprise resource planning"],
+    
+    # Bahasa Indonesia variations
+    "kepemimpinan": ["leadership", "team leadership"],
+    "kualitas": ["quality", "quality control", "qc"],
 }
 
 # ============================================
@@ -175,35 +166,86 @@ class CVParser:
         
         return None
     
-    def extract_skills(self, text: str) -> List[str]:
+    def extract_skills(self, text: str, required_skills: List[str]) -> List[str]:
+        """
+        Extract skills dari CV berdasarkan required_skills yang diberikan.
+        Dynamic approach - hanya scan skills yang relevan.
+        
+        Args:
+            text: CV text
+            required_skills: List of skills yang dicari (dari job requirements)
+        
+        Returns:
+            List of skills yang ditemukan di CV
+        """
         text_lower = text.lower()
         found_skills = set()
         
-        # Keyword matching
-        for skill in ALL_SKILLS:
-            if skill.lower() in text_lower:
-                found_skills.add(skill.title())
+        for required_skill in required_skills:
+            # Get variations dari skill ini
+            variations = self._get_skill_variations(required_skill)
+            
+            # Check setiap variation
+            for variation in variations:
+                if variation.lower() in text_lower:
+                    # Simpan dengan format original required_skill
+                    found_skills.add(required_skill)
+                    break  # Sudah ketemu, skip variations lainnya
         
-        # Pattern matching
+        # Pattern matching untuk Bahasa Indonesia
         for pattern, skill in SKILL_PATTERNS.items():
-            if re.search(pattern, text_lower):
-                found_skills.add(skill)
+            if skill in required_skills:  # Hanya jika skill ini di-require
+                if re.search(pattern, text_lower):
+                    found_skills.add(skill)
         
         return list(found_skills)
     
-    def parse(self, file_path: str) -> Dict:
-        # Extract text
-        if file_path.endswith('.pdf'):
-            text = self.extract_text_from_pdf(file_path)
-        elif file_path.endswith('.docx'):
-            text = self.extract_text_from_docx(file_path)
-        else:
-            raise ValueError("Unsupported file format")
+    def _get_skill_variations(self, skill: str) -> List[str]:
+        """
+        Get variations dari skill (synonyms, common typos, etc)
+        
+        Args:
+            skill: Skill name
+        
+        Returns:
+            List of variations
+        """
+        skill_lower = skill.lower()
+        variations = [skill_lower]
+        
+        # Check di COMMON_SYNONYMS
+        for key, synonyms in COMMON_SYNONYMS.items():
+            if skill_lower == key or skill_lower in synonyms:
+                variations.extend(synonyms)
+                variations.append(key)
+        
+        # Remove duplicates
+        return list(set(variations))
+    
+    def parse(self, file_path: str, required_skills: List[str]) -> Dict:
+        """
+        Parse CV dan extract information.
+        
+        Args:
+            file_path: Path to PDF file
+            required_skills: List of skills yang dicari
+        
+        Returns:
+            Dict with parsed information
+        """
+        # Extract text from PDF only
+        if not file_path.endswith('.pdf'):
+            raise ValueError("Only PDF files are supported")
+        
+        text = self.extract_text_from_pdf(file_path)
+        
+        if not text or len(text.strip()) < 50:
+            raise ValueError("Unable to extract text from PDF or file is too short")
         
         # Extract information
         name = self.extract_name(text)
         contact = self.extract_contact_info(text)
-        skills = self.extract_skills(text)
+        skills = self.extract_skills(text, required_skills)  # Pass required_skills
         
         return {
             'name': name,
@@ -222,10 +264,13 @@ class SkillMatcher:
         self.threshold = threshold
     
     def get_synonyms(self, skill: str) -> List[str]:
+        """
+        Get synonyms untuk skill dari COMMON_SYNONYMS
+        """
         skill_lower = skill.lower()
         expanded = [skill_lower]
         
-        for key, synonyms in SYNONYMS.items():
+        for key, synonyms in COMMON_SYNONYMS.items():
             if skill_lower in synonyms or skill_lower == key:
                 expanded.extend(synonyms)
                 expanded.append(key)
@@ -327,6 +372,8 @@ def process_complete():
     Request Body (JSON):
     {
         "cv_url": "https://...",
+        "job_id": "...",
+        "application_id": "...",
         "job_title": "...",
         "required_skills": [...]
     }
@@ -335,6 +382,8 @@ def process_complete():
         data = request.get_json()
         
         cv_url = data.get('cv_url')
+        job_id = data.get('job_id')
+        application_id = data.get('application_id')
         job_title = data.get('job_title', 'Unknown Position')
         required_skills = data.get('required_skills', [])
         
@@ -360,17 +409,19 @@ def process_complete():
                 'error': f'Failed to download CV: HTTP {cv_response.status_code}'
             }), 400
         
-        # Determine file extension
+        # Validate PDF only
         content_type = cv_response.headers.get('Content-Type', '')
-        if 'pdf' in content_type or cv_url.endswith('.pdf'):
-            ext = '.pdf'
-        elif 'word' in content_type or cv_url.endswith('.docx'):
-            ext = '.docx'
-        else:
-            ext = '.pdf'  # Default
+        is_pdf = 'pdf' in content_type or cv_url.lower().endswith('.pdf')
+        
+        if not is_pdf:
+            return jsonify({
+                'success': False,
+                'error': 'Only PDF files are supported',
+                'message': 'Please upload CV in PDF format only'
+            }), 400
         
         # Save temporarily
-        temp_filename = f"temp_{os.urandom(8).hex()}{ext}"
+        temp_filename = f"temp_{os.urandom(8).hex()}.pdf"
         temp_path = os.path.join(TEMP_FOLDER, temp_filename)
         
         with open(temp_path, 'wb') as f:
@@ -380,7 +431,7 @@ def process_complete():
         
         # Parse CV
         print("🔍 Parsing CV...")
-        parsed_cv = cv_parser.parse(temp_path)
+        parsed_cv = cv_parser.parse(temp_path, required_skills)
         
         # Match skills
         print("🎯 Matching skills...")
@@ -392,32 +443,45 @@ def process_complete():
         
         # Generate recommendation
         match_pct = match_result['statistics']['match_percentage']
-        if match_pct >= 70:
-            recommendation = "HIGHLY RECOMMENDED"
-        elif match_pct >= 50:
+        matched_count = match_result['statistics']['matched_count']
+        
+        # Simple logic: if any skill matches, then RECOMMENDED
+        if matched_count > 0:
             recommendation = "RECOMMENDED"
-        else:
-            recommendation = "NOT RECOMMENDED"
-        
-        print(f"✅ Processing complete: {match_pct}% match")
-        
-        return jsonify({
-            'success': True,
-            'data': {
-                'job_title': job_title,
-                'candidate': {
-                    'name': parsed_cv['name'],
-                    'email': parsed_cv['email'],
-                    'phone': parsed_cv['phone'],
-                    'skills': parsed_cv['skills']
-                },
-                'matching': match_result,
-                'recommendation': {
-                    'status': recommendation,
-                    'score': match_pct
+            
+            print(f"✅ Processing complete: {matched_count}/{match_result['statistics']['total_required']} skills matched ({match_pct}%) - RECOMMENDED")
+            
+            # Only send data if RECOMMENDED
+            return jsonify({
+                'success': True,
+                'data': {
+                    'application_id': application_id,
+                    'job_id': job_id,
+                    'job_title': job_title,
+                    'candidate': {
+                        'name': parsed_cv['name'],
+                        'email': parsed_cv['email'],
+                        'phone': parsed_cv['phone'],
+                        'skills': parsed_cv['skills']
+                    },
+                    'matching': match_result,
+                    'recommendation': {
+                        'status': recommendation,
+                        'score': match_pct
+                    }
                 }
-            }
-        })
+            })
+        else:
+            # NOT RECOMMENDED - don't send candidate data
+            print(f"❌ Processing complete: 0/{match_result['statistics']['total_required']} skills matched - NOT RECOMMENDED")
+            
+            return jsonify({
+                'success': False,
+                'reason': 'NOT_RECOMMENDED',
+                'message': 'No matching skills found',
+                'application_id': application_id,
+                'job_id': job_id
+            }), 200  # Still 200 OK, but success=false
         
     except requests.RequestException as e:
         return jsonify({
@@ -442,7 +506,8 @@ if __name__ == '__main__':
     print("="*60)
     print(f"\n🌐 Environment: {FLASK_ENV}")
     print(f"📍 Port: {PORT}")
-    print(f"🔧 Skills in taxonomy: {len(ALL_SKILLS)}")
+    print(f"🔧 Common synonyms: {len(COMMON_SYNONYMS)} groups")
+    print(f"⚡ Dynamic skill matching enabled")
     print("\n✅ Server starting...\n")
     
     app.run(host='0.0.0.0', port=PORT, debug=(FLASK_ENV == 'development'))
