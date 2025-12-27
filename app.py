@@ -70,12 +70,12 @@ COMMON_SYNONYMS = {
     "office": ["microsoft office", "ms office"],
     
     # Quality & Manufacturing
-    "quality control": ["qc", "quality assurance", "qa", "quality inspector", "quality checker"],
+    "quality control": ["qc", "quality assurance", "qa", "quality inspector", "quality checker", "inspeksi kualitas"],
     "lean manufacturing": ["lean", "lean production", "5s", "kaizen"],
     "six sigma": ["6 sigma", "six-sigma", "6-sigma"],
     
     # Leadership & Soft Skills
-    "leadership": ["team leadership", "people management", "team lead", "team leader", "supervisi"],
+    "leadership": ["team leadership", "people management", "team lead", "team leader", "supervisi", "kepemimpinan"],
     "communication": ["komunikasi", "interpersonal skills"],
     "problem solving": ["problem-solving", "analytical thinking", "critical thinking"],
     
@@ -83,6 +83,11 @@ COMMON_SYNONYMS = {
     "autocad": ["auto cad", "auto-cad", "cad"],
     "sap": ["sap erp", "sap system"],
     "erp": ["erp system", "enterprise resource planning"],
+    
+    # Industry Specific - Textile & Footwear
+    "ppic": ["ppic", "production planning", "inventory control", "planning control", "production control"],
+    "painting": ["painting", "cat", "pengecatan", "finishing", "spray painting", "pewarnaan"],
+    "sablon": ["sablon", "screen printing", "printing", "cetak sablon", "sablon manual", "sablon otomatis"],
     
     # Bahasa Indonesia variations
     "kepemimpinan": ["leadership", "team leadership"],
@@ -102,6 +107,44 @@ SKILL_PATTERNS = {
 }
 
 # ============================================
+# KEYWORD EXTRACTION FROM JOB TITLE
+# ============================================
+
+def extract_keywords_from_job_title(job_title: str) -> List[str]:
+    """
+    Extract keywords from job title by removing stopwords and common terms.
+    
+    Args:
+        job_title: Job title string (e.g., "OPERATOR SABLON")
+    
+    Returns:
+        List of keywords (e.g., ["operator", "sablon"])
+    """
+    # Indonesian + English stopwords
+    STOPWORDS = {
+        'dan', 'atau', 'untuk', 'di', 'ke', 'dari', 'yang', 'dengan',
+        'and', 'or', 'for', 'in', 'to', 'from', 'with', 'the', 'a', 'an',
+        'staff', 'karyawan', 'pegawai', 'pekerja', 'worker', 'employee'
+    }
+    
+    # Common acronyms (exception untuk short words)
+    ACRONYMS = {'qc', 'qa', 'hr', 'it', 'ga', 'ppic', 'hrd', 'erp', 'sap'}
+    
+    # Clean and tokenize
+    title_lower = job_title.lower()
+    # Remove special characters, keep only alphanumeric and spaces
+    title_clean = re.sub(r'[^a-z0-9\s]', ' ', title_lower)
+    words = title_clean.split()
+    
+    # Filter stopwords and short words (except acronyms)
+    keywords = [
+        w for w in words 
+        if w not in STOPWORDS and (len(w) > 2 or w in ACRONYMS)
+    ]
+    
+    return keywords
+
+# ============================================
 # CV PARSER CLASS
 # ============================================
 
@@ -119,7 +162,41 @@ class CVParser:
                         text += page_text + "\n"
         except Exception as e:
             print(f"Error extracting PDF: {e}")
+        
+        # Preprocess text after extraction
+        text = self._preprocess_text(text)
+        
         return text
+    
+    def _preprocess_text(self, text: str) -> str:
+        """
+        Basic text preprocessing to clean CV text.
+        
+        Steps:
+        1. Remove extra whitespaces (multiple spaces/tabs -> single space)
+        2. Remove bullets and decorative symbols
+        3. Normalize line breaks (max 2 consecutive)
+        4. Remove leading/trailing whitespace per line
+        
+        Preserves:
+        - Case (for name extraction with NER)
+        - Punctuation (for email/phone extraction)
+        - Numbers
+        """
+        # Remove extra spaces and tabs (but preserve single spaces)
+        text = re.sub(r'[ \t]+', ' ', text)
+        
+        # Remove bullets and decorative symbols
+        text = re.sub(r'[•●○■□▪▫◆◇★☆→←↑↓]', '', text)
+        
+        # Normalize line breaks (max 2 consecutive = paragraph separator)
+        text = re.sub(r'\n{3,}', '\n\n', text)
+        
+        # Remove leading/trailing whitespace per line
+        lines = [line.strip() for line in text.split('\n')]
+        text = '\n'.join(lines)
+        
+        return text.strip()
     
     def extract_text_from_docx(self, file_path: str) -> str:
         text = ""
@@ -172,13 +249,14 @@ class CVParser:
         Dynamic approach - hanya scan skills yang relevan.
         
         Args:
-            text: CV text
+            text: CV text (already preprocessed)
             required_skills: List of skills yang dicari (dari job requirements)
         
         Returns:
             List of skills yang ditemukan di CV
         """
-        text_lower = text.lower()
+        # Additional preprocessing for skill matching
+        text_lower = self._preprocess_for_matching(text)
         found_skills = set()
         
         for required_skill in required_skills:
@@ -221,6 +299,32 @@ class CVParser:
         
         # Remove duplicates
         return list(set(variations))
+    
+    def _preprocess_for_matching(self, text: str) -> str:
+        """
+        Aggressive preprocessing khusus untuk skill matching.
+        
+        Steps:
+        1. Lowercase (case-insensitive matching)
+        2. Remove punctuation (except hyphen for multi-word skills)
+        3. Normalize spaces
+        
+        Args:
+            text: Text to preprocess
+        
+        Returns:
+            Preprocessed text for matching
+        """
+        # Lowercase
+        text = text.lower()
+        
+        # Remove punctuation (keep hyphen and alphanumeric)
+        text = re.sub(r'[^\w\s-]', '', text)
+        
+        # Normalize spaces
+        text = re.sub(r'\s+', ' ', text)
+        
+        return text.strip()
     
     def parse(self, file_path: str, required_skills: List[str]) -> Dict:
         """
@@ -393,10 +497,22 @@ def process_complete():
                 'error': 'cv_url is required'
             }), 400
         
+        # FALLBACK: If no required_skills, extract from job_title
+        if not required_skills:
+            if job_title and job_title != 'Unknown Position':
+                print(f"⚠️  No required_skills provided. Extracting keywords from job title: {job_title}")
+                required_skills = extract_keywords_from_job_title(job_title)
+                print(f"📝 Extracted keywords: {required_skills}")
+            else:
+                return jsonify({
+                    'success': False,
+                    'error': 'Either required_skills or job_title must be provided'
+                }), 400
+        
         if not required_skills:
             return jsonify({
                 'success': False,
-                'error': 'required_skills is required'
+                'error': 'Unable to determine skills to match (empty job_title or required_skills)'
             }), 400
         
         # Download CV from URL

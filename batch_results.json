@@ -1,0 +1,793 @@
+{
+  "job_info": {
+    "job_title": "Operator Sablon",
+    "required_skill": []
+  },
+  "processing_date": "2025-12-27T16:48:36.022394",
+  "summary": {
+    "total_cv": 70,
+    "processed": 37,
+    "recommended": 18,
+    "not_recommended": 19,
+    "errors": 33
+  },
+  "results": [
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "Ds55jWfh3KuZUSvSMWe26B7x4udHjBuq.pdf",
+      "cv_index": 1
+    },
+    {
+      "nama": "SITI NURHAYATI",
+      "kontak": {
+        "email": "hayati5823877@gmail.com",
+        "phone": "083187032860"
+      },
+      "success": true,
+      "cv_filename": "Dw5A6BtRcpeBGOA4RiahJchIxZV6D4lQ.pdf",
+      "cv_index": 2
+    },
+    {
+      "nama": "ASEP SUGIARTO",
+      "kontak": {
+        "email": "sugiartoasep109@gmail.com",
+        "phone": "081-295-755"
+      },
+      "success": true,
+      "cv_filename": "E7qGQFQbIlyGzB2snu4bF9iKZgY6CiND.pdf",
+      "cv_index": 3
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "ebXxrOmCZBQsQT68GfCL6ZaMhwiNcHwc.pdf",
+      "cv_index": 4
+    },
+    {
+      "nama": "RIFQI ‘AQIL MUBARAK",
+      "kontak": {
+        "email": "rifqiaqil17@gmail.com",
+        "phone": "0895634790400"
+      },
+      "success": true,
+      "cv_filename": "Eem8huxYRGapx9VE7AT2UGkZTM6KkrDv.pdf",
+      "cv_index": 5
+    },
+    {
+      "nama": "FAIQ FAUZI",
+      "kontak": {
+        "email": "paikpauji@gmail.com",
+        "phone": "+62-831-8282-7181"
+      },
+      "skill": [
+        "sablon"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "F5LfbESfKbcffqxnYkrYevgS8mwjRIBO.pdf",
+      "cv_index": 6
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "fk3M2OycOGWCHqpkmVzgW8wbNOcUCSRy.pdf",
+      "cv_index": 7
+    },
+    {
+      "nama": "KONTAK PENGALAMAN PKL",
+      "kontak": {
+        "email": "triliyani167@gmail.com",
+        "phone": "+62 831 4649 6971"
+      },
+      "success": true,
+      "cv_filename": "fpcUNOfl5u7oF6858WNs8zGLNZHpLCkf.pdf",
+      "cv_index": 8
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "gjy5ePDBQRW16DQ1F5u77OqZENvuioOo.pdf",
+      "cv_index": 9
+    },
+    {
+      "nama": "SARI KAMELIA",
+      "kontak": {
+        "email": "solehasepanjangjaman34567@gmail.com",
+        "phone": "+62 831-4147-9010"
+      },
+      "success": true,
+      "cv_filename": "gZgRbLZyxf5bg6kBUOCWpmKIqCchMY78.pdf",
+      "cv_index": 10
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "gZwGerw7cFqPqsy0hKksW09ElbR8qywq.pdf",
+      "cv_index": 11
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "HFhSOKINVxi5NcHv50fjJYVYwkuhopPd.pdf",
+      "cv_index": 12
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "HP0M9Miolsi8vp0m8V4z32VTrsP98YWo.pdf",
+      "cv_index": 13
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "hpw1WH6cae8K2O5dAs8xJsosQybCNzoc.pdf",
+      "cv_index": 14
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "Hysr8SiDZ9JYSKJE3X3KNd6W3g9UFuEH.pdf",
+      "cv_index": 15
+    },
+    {
+      "nama": "Dedi Yarmudik",
+      "kontak": {
+        "email": "dedia7162@gmail.com",
+        "phone": "+6283184903013"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "iErUFn5MwcVUCT91JwTSEnlfQZd0YR01.pdf",
+      "cv_index": 16
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "ikJn2NPZm3z2Ldzeutm89x3snVa7elIZ.pdf",
+      "cv_index": 17
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "iPE12heQ0wPetiq4eVbMs4A4qUpCVcW5.pdf",
+      "cv_index": 18
+    },
+    {
+      "nama": "ATIKAH NURFABILA",
+      "kontak": {
+        "email": "nurfabila21@gmail.com",
+        "phone": "+62 895 3532 0361"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "JrGLCPx3FP8fEPK7H9gqNeUN1sDu0sKG.pdf",
+      "cv_index": 19
+    },
+    {
+      "nama": "Dengan Hormat",
+      "kontak": {
+        "email": null,
+        "phone": "081546756465"
+      },
+      "success": true,
+      "cv_filename": "krmrqlvEsJD0d11OzIgZ2R9wQ1KwUDLJ.pdf",
+      "cv_index": 20
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "kZUXg7QagenyzEyYr2B6eeylpwx8HmtH.pdf",
+      "cv_index": 21
+    },
+    {
+      "nama": "YUNI YUNINGSIH",
+      "kontak": {
+        "email": "yyuni6808@gmail.com",
+        "phone": "089643809287"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "LEE0TjHtVA6VCAU88Q6sI4Vc0nF2aVJK.pdf",
+      "cv_index": 22
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "livaNsDC6BunTvOFaOHKwZ67JwulYfAF.pdf",
+      "cv_index": 23
+    },
+    {
+      "nama": "Melalui sebuah surat lamaran ini",
+      "kontak": {
+        "email": null,
+        "phone": "083181135662"
+      },
+      "success": true,
+      "cv_filename": "mC1YoivcIHmcRRc1kINtbDnOADz1hLQT.pdf",
+      "cv_index": 24
+    },
+    {
+      "nama": "TENTANG SAYA",
+      "kontak": {
+        "email": "adin71270@gmail.com",
+        "phone": "+62 822 1536 3210"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "mlj6bRHmJHKgXPbYRwW4ExDaZgrACRGx.pdf",
+      "cv_index": 25
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "N21XGTZr5b0m8xd6itW6GWZoEBxUdKYM.pdf",
+      "cv_index": 26
+    },
+    {
+      "nama": "DENI NOVIANDANI",
+      "kontak": {
+        "email": "noviandanideni@gmail.com",
+        "phone": "081319640368"
+      },
+      "success": true,
+      "cv_filename": "nCKRg29xTjLyCsE8xW3swBUQGcCtvj2L.pdf",
+      "cv_index": 27
+    },
+    {
+      "nama": "RIWAYAT HIDUP",
+      "kontak": {
+        "email": "sofyancooljaz37@gmail.com",
+        "phone": "0813 1103 2124"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "ndxdr9SZi0lSDI7uiFqXig87N49ko1hl.pdf",
+      "cv_index": 28
+    },
+    {
+      "nama": "Perihal : Lamaran Pekerjaan",
+      "kontak": {
+        "email": null,
+        "phone": "0858-6413-1172"
+      },
+      "success": true,
+      "cv_filename": "nZCW9yGpp1J0ElLf6mxK2SxsDeL9ZhNa.pdf",
+      "cv_index": 29
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "O8M8d5WNj3Tw3g7dUKlxEEUjK6TvCuje.pdf",
+      "cv_index": 30
+    },
+    {
+      "nama": "FAIQ FAUZI",
+      "kontak": {
+        "email": "paikpauji@gmail.com",
+        "phone": "+62-831-8282-7181"
+      },
+      "skill": [
+        "sablon"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "oBkLcAvzUarSiXFJW1hznbqGR08I3jIK.pdf",
+      "cv_index": 31
+    },
+    {
+      "nama": "ZAHRA NUR APRINI",
+      "kontak": {
+        "email": "zahranuraprini269@gmail.com",
+        "phone": "083878084438"
+      },
+      "success": true,
+      "cv_filename": "OezLN4QriafInwucsDZbG817mvC651CL.pdf",
+      "cv_index": 32
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "oHzvv5FnDb6bMg8EscaEoZ4tuxH5xsf6.pdf",
+      "cv_index": 33
+    },
+    {
+      "nama": "WURI NUROHIM",
+      "kontak": {
+        "email": "nurohimwuri@gmail.com",
+        "phone": "+6289652187467"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "oJ37TeOhFNLaD5Q0KryHWibOTewfWIgC.pdf",
+      "cv_index": 34
+    },
+    {
+      "nama": "Lulusan Baru",
+      "kontak": {
+        "email": "alifp8836@gmail.com",
+        "phone": "083146819750"
+      },
+      "skill": [
+        "sablon",
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "200.0%",
+      "success": true,
+      "cv_filename": "Ow2K7fMEalqHB59HVoBSkIRmbqK9X4QE.pdf",
+      "cv_index": 35
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "OYBFOgxOGLtg9cKZVhSqwk8ziGpNZNG4.pdf",
+      "cv_index": 36
+    },
+    {
+      "nama": "MAULIDA AL VITO",
+      "kontak": {
+        "email": "maulidaalvito067@gmail.com",
+        "phone": "+6283824950400"
+      },
+      "success": true,
+      "cv_filename": "pkDpUEnbfOzcZSZrydsLuRc0WCbOZIaa.pdf",
+      "cv_index": 37
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "PMPA7LNUc4fKhPxnASjDivdvVfu17CvV.pdf",
+      "cv_index": 38
+    },
+    {
+      "nama": "WURI NUROHIM",
+      "kontak": {
+        "email": "nurohimwuri@gmail.com",
+        "phone": "+6289652187467"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "pMsRt4HykYjKfcx8mSZfxTVhZGnLA6B7.pdf",
+      "cv_index": 39
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "pOb4h8iMDSpVz5nMREc3BIIe264DiTCR.pdf",
+      "cv_index": 40
+    },
+    {
+      "nama": "FAIQ FAUZI",
+      "kontak": {
+        "email": "paikpauji@gmail.com",
+        "phone": "+62-831-8282-7181"
+      },
+      "skill": [
+        "sablon"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "Qh0OpJlCfytWaz6u134Vkus9wncd6s4w.pdf",
+      "cv_index": 41
+    },
+    {
+      "nama": "AGUS PRAMANA",
+      "kontak": {
+        "email": "aguspramanaa23@gmail.com",
+        "phone": "083142566248"
+      },
+      "skill": [
+        "sablon"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "QU4CHpqM4E6EOaUsMP9X7MBD2KrGnv4c.pdf",
+      "cv_index": 42
+    },
+    {
+      "nama": "Data Pribadi",
+      "kontak": {
+        "email": null,
+        "phone": "083813422961"
+      },
+      "success": true,
+      "cv_filename": "r0MItkVi1rBrZfOt6GqIbWbbvEX22gRn.pdf",
+      "cv_index": 43
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "r3JeXJjcIPI4dHP63T9yJaq5nkvkS9us.pdf",
+      "cv_index": 44
+    },
+    {
+      "nama": "ZAHRA SRI RAHMAH",
+      "kontak": {
+        "email": "zahrasrirahma@gmail.com",
+        "phone": "082321454263"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "R6ZDdrLDTUKKMNcQeAqLb4L7k6OOU8Ys.pdf",
+      "cv_index": 45
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "r7ALK6LgoVj8Dp7wgYagFVMZQpEfreWd.pdf",
+      "cv_index": 46
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "RhnqEALNeVYWBxmbXhQWA4QAqlvBQ6sK.pdf",
+      "cv_index": 47
+    },
+    {
+      "nama": "DE TIRTA",
+      "kontak": {
+        "email": "detirtaonassis70@gmail.com",
+        "phone": "+6281321389516"
+      },
+      "success": true,
+      "cv_filename": "rJicYsYNRXw1o4zQSSf8bCwn3q0n3mJu.pdf",
+      "cv_index": 48
+    },
+    {
+      "nama": "Tentang Saya",
+      "kontak": {
+        "email": "tiaraaagustina333@gmail.com",
+        "phone": "+628815248981"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "rs2hgISgkjGoaFpwWYKhZ768XfDsTucB.pdf",
+      "cv_index": 49
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "rYLpPZ5rdX6F2b2Jy9yLcfznexWYP852.pdf",
+      "cv_index": 50
+    },
+    {
+      "nama": "Asep Rosihin",
+      "kontak": {
+        "email": "aseprosihin23@gmail.com",
+        "phone": "015-2018 0812"
+      },
+      "success": true,
+      "cv_filename": "S2aFW7Yu95HsaKBYyfq7qdptM0hNpPAN.pdf",
+      "cv_index": 51
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "skXghKi3o1v15i2X4G9IWZnbSeGSVXmm.pdf",
+      "cv_index": 52
+    },
+    {
+      "nama": "S Y .",
+      "kontak": {
+        "email": "olief.yahya@gmail.com",
+        "phone": "0877-7966-3507"
+      },
+      "success": true,
+      "cv_filename": "sTRhughGPVebDwiHAV9TOGyTFWwZzyu2.pdf",
+      "cv_index": 53
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "SWHA8bceM181ptvAuAc7lNqQvfEgdAry.pdf",
+      "cv_index": 54
+    },
+    {
+      "nama": "DIKRI PRIYATNO",
+      "kontak": {
+        "email": "clddikry@gmail.com",
+        "phone": "085810196504"
+      },
+      "skill": [
+        "sablon",
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "200.0%",
+      "success": true,
+      "cv_filename": "sXpfdhOfiltD0Zjn4Id2pnjv4cgjcYBd.pdf",
+      "cv_index": 55
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "sYxHWgJA3Y9gmJGcdwy12a7zTdIgFbxG.pdf",
+      "cv_index": 56
+    },
+    {
+      "nama": "PENDIDIKAN FORMAL",
+      "kontak": {
+        "email": null,
+        "phone": "0881023184426"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "tILGAXfpQTY108TPICxmHZdZpnWgSCgq.pdf",
+      "cv_index": 57
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "ucKAFjnjOSAT3LvSDxOMPqO1L3wFklJT.pdf",
+      "cv_index": 58
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "uoiZ5zGxHn980V332okzL15Yy0IjjMz1.pdf",
+      "cv_index": 59
+    },
+    {
+      "nama": "FAQIH SAPUTRA",
+      "kontak": {
+        "email": "faqihsaputra448@gmail.com",
+        "phone": "083856221035"
+      },
+      "success": true,
+      "cv_filename": "URDYrVRBd4jQJQ4ovSvoMT5HvJsO5g9G.pdf",
+      "cv_index": 60
+    },
+    {
+      "nama": "DZIKRI RAMADHANI",
+      "kontak": {
+        "email": "dzikriramadhani09@gmail.com",
+        "phone": "082115327912"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "V0zyhpidGU1QNmva9nRCVFUvOHX00vxX.pdf",
+      "cv_index": 61
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "v9CnENxVaAirXxUkPYlmj2CWI3lMI43c.pdf",
+      "cv_index": 62
+    },
+    {
+      "nama": "Data Pribadi",
+      "kontak": {
+        "email": "litta.arlita@gmail.com",
+        "phone": "+6283120873624"
+      },
+      "skill": [
+        "operator"
+      ],
+      "skill_required": [],
+      "status": "RECOMMENDED",
+      "persentase": "100.0%",
+      "success": true,
+      "cv_filename": "vhfUPtcwxRro4KJ0zR4gAE8lmmRc7bQB.pdf",
+      "cv_index": 63
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "vRgclN8LeMMciggJI58RmbdtDIVAlxPC.pdf",
+      "cv_index": 64
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "W6biVciacxigEOJMfv6e87jnA3l6N3SG.pdf",
+      "cv_index": 65
+    },
+    {
+      "nama": "ARDAN ROSDIYANTO",
+      "kontak": {
+        "email": "mochamadardan28@gmail.com",
+        "phone": "083115308244"
+      },
+      "success": true,
+      "cv_filename": "w6TZVB2JTHbHl7CN0WbxVXepU9his2Ti.pdf",
+      "cv_index": 66
+    },
+    {
+      "nama": "Siti Fauziah",
+      "kontak": {
+        "email": "sitifauziah5711@gmail.com",
+        "phone": "0851-6881-6597"
+      },
+      "success": true,
+      "cv_filename": "WBeOweoUqivCXpqOsqSK15jNnOcfM5JF.pdf",
+      "cv_index": 67
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "WP6N56hUOVf1WsMiuJjtb9nyQ3wSetDx.pdf",
+      "cv_index": 68
+    },
+    {
+      "nama": "Desa Jemaras Lor, Kec.",
+      "kontak": {
+        "email": "msalsabilla8@gmail.com",
+        "phone": "0895-3454-8420"
+      },
+      "success": true,
+      "cv_filename": "X1jfa21LI1ujZPLRGOtzxkGKQyirqG3q.pdf",
+      "cv_index": 69
+    },
+    {
+      "success": false,
+      "error": "CV tidak dapat dibaca",
+      "error_code": "UNREADABLE_CV",
+      "details": "File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.",
+      "suggestion": "Silakan upload ulang CV dalam format PDF text-based",
+      "cv_filename": "XgDH4Kr2K1bxMTYgFxQIZZ1qKDFxop0i.pdf",
+      "cv_index": 70
+    }
+  ]
+}
