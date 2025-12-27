@@ -1,26 +1,7 @@
-# Web Framework
-flask==2.3.0
+flask==3.0.0
 flask-cors==4.0.0
-gunicorn==21.2.0
-werkzeug==2.3.0
-
-# Library Pendukung (WAJIB DIKUNCI)
-numpy==1.26.4
-
-# NLP & NER
-spacy==3.7.0
-nltk==3.8.1
-en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.0/en_core_web_sm-3.7.0-py3-none-any.whl
-
-# Fuzzy Matching
-rapidfuzz==3.13.0
-
-# Document Processing
-pdfplumber==0.10.0
-python-docx==1.1.0
-
-# HTTP Requests
+pdfplumber==0.10.3
 requests==2.31.0
-
-# Environment Variables
-python-dotenv==1.0.0
+rapidfuzz==3.5.2
+spacy==3.7.2
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
