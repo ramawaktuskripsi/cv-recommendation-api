@@ -1,16 +1,9 @@
-import os
-import json
-from pathlib import Path
-from datetime import datetime
 import pdfplumber
 import requests
 import re
 from rapidfuzz import fuzz
+import json
 import spacy
-
-# ============================================
-# CV MATCHING SYSTEM CLASS
-# ============================================
 
 class CVMatchingSystem:
     def __init__(self):
@@ -47,12 +40,12 @@ class CVMatchingSystem:
             'excel': ['excel', 'microsoft excel', 'ms excel', 'spreadsheet'],
             'leadership': ['leadership', 'team leadership', 'people management', 'team lead'],
             'quality control': ['qc', 'quality control', 'quality assurance', 'qa', 'quality inspector'],
-            'operator': ['operator', 'machine operator', 'production operator'],
-            'sablon': ['sablon', 'screen printing', 'printing'],
         }
     
     def request_data_from_api(self, api_url):
-        """Step 1: Request Data (CV dan Lowongan) dari Website via API"""
+        """
+        Step 1: Request Data (CV dan Lowongan) dari Website via API
+        """
         try:
             response = requests.get(api_url, timeout=10)
             response.raise_for_status()
@@ -66,7 +59,9 @@ class CVMatchingSystem:
             return None
     
     def validate_uri_cv(self, data):
-        """Step 2: Cek Kolom uri_cv Ada/Tidak"""
+        """
+        Step 2: Cek Kolom uri_cv Ada/Tidak
+        """
         if not data:
             return False
         
@@ -78,12 +73,16 @@ class CVMatchingSystem:
         return True
     
     def check_required_skills(self, data):
-        """Step 3: Cek Required Skills pada Lowongan Ada/Tidak"""
+        """
+        Step 3: Cek Required Skills pada Lowongan Ada/Tidak
+        """
         required_skills = data.get('required_skill', [])
         return len(required_skills) > 0
     
     def extract_job_info(self, data, has_required_skills):
-        """Step 4: Ekstrak Job Title (dan Required Skills jika ada)"""
+        """
+        Step 4: Ekstrak Job Title (dan Required Skills jika ada)
+        """
         self.job_data['job_title'] = data.get('job_title', '')
         
         if has_required_skills:
@@ -126,6 +125,7 @@ class CVMatchingSystem:
                     print(f"   • PDF berbasis image/scan (tidak didukung)")
                     print(f"   • File corrupt atau format tidak standar")
                     print(f"   • PDF password-protected")
+                    print(f"\n   Solusi: Upload CV dalam format PDF TEXT-BASED")
                     return False
                 
                 print(f"✓ Berhasil ekstrak CV ({len(self.cv_raw_text)} karakter)")
@@ -137,12 +137,20 @@ class CVMatchingSystem:
         
         except Exception as e:
             print(f"❌ Error saat ekstrak CV: {e}")
+            print(f"   Kemungkinan: File corrupt, format tidak didukung, atau password-protected")
             return False
     
     def preprocess_text(self):
         """
         Step 6: Pre-processing Text
         (Remove whitespace, bullets, normalize)
+        
+        Normalisasi:
+        - Remove extra whitespaces
+        - Remove bullets dan simbol dekoratif
+        - Normalize line breaks
+        - Lowercase untuk matching
+        - Remove punctuation (kecuali untuk email/phone)
         """
         text = self.cv_raw_text
         
@@ -209,18 +217,13 @@ class CVMatchingSystem:
         email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
         emails = re.findall(email_pattern, text)
         
-        # Extract phone (format Indonesia) - dengan berbagai variasi
+        # Extract phone (format Indonesia) - dengan prioritas pattern lengkap
         phone_patterns = [
-            # Format +62-xxx-xxxx-xxxx (dengan tanda hubung)
-            r'\+62[-\s]?\d{2,3}[-\s]?\d{3,4}[-\s]?\d{3,4}',  # +62-831-8282-7181
-            # Format 62-xxx-xxxx-xxxx (tanpa +)
-            r'62[-\s]?\d{2,3}[-\s]?\d{3,4}[-\s]?\d{3,4}',  # 62-831-8282-7181
-            # Format 0xxx-xxxx-xxxx atau 0xxx xxxx xxxx
-            r'0\d{2,3}[-\s]\d{3,4}[-\s]\d{3,4}',  # 0821-8486-8797 atau 0821 8486 8797
-            # Format tanpa pemisah 08xxxxxxxxxx
-            r'0\d{9,12}',  # 082112345678
-            # Format +62 tanpa pemisah
-            r'\+?62\d{9,12}',  # +6282112345678
+            # Format lengkap dengan 10-13 digit
+            r'0\d{3}[\s-]?\d{4}[\s-]?\d{3,4}',  # 0821 8486 8797 atau 0821-8486-8797
+            r'\+?62\s?\d{3}[\s-]?\d{4}[\s-]?\d{3,4}',  # +62 821 8486 8797
+            # Format dengan pemisah
+            r'0\d{2,3}[\s-]\d{3,4}[\s-]\d{3,4}',  # 021-123-4567
         ]
         
         phone = None
@@ -276,6 +279,9 @@ class CVMatchingSystem:
         """
         Step 7: Ekstrak Skill dari CV
         (Fuzzy String Matching, Synonym Mapping)
+        
+        Args:
+            required_skills_or_job_title: List of skills atau job title untuk dicari
         """
         text = self.cv_processed_text
         found_skills = set()
@@ -334,7 +340,9 @@ class CVMatchingSystem:
         print(f"  ✓ Skills ditemukan: {', '.join(skills) if skills else 'Tidak ada'}")
     
     def skill_matching(self):
-        """Step 8: Skill Matching dengan Job Title ATAU Required Skill"""
+        """
+        Step 8: Skill Matching dengan Job Title ATAU Required Skill
+        """
         print("\n🎯 Skill Matching:")
         
         cv_skills = self.extracted_info['skills']
@@ -373,7 +381,9 @@ class CVMatchingSystem:
         print(f"  ✓ Skills: {', '.join(matched_skills) if matched_skills else 'Tidak ada'}")
     
     def calculate_percentage(self):
-        """Step 9: Hitung Persentase Skill Match (jika match_count > 0)"""
+        """
+        Step 9: Hitung Persentase Skill Match (jika match_count > 0)
+        """
         if self.match_result['match_count'] > 0:
             percentage = (self.match_result['match_count'] / 
                          self.match_result['total_required']) * 100
@@ -382,7 +392,13 @@ class CVMatchingSystem:
         return 0
     
     def prepare_response(self):
-        """Step 10: Response Data ke Website via API"""
+        """
+        Step 10: Response Data ke Website via API
+        
+        Output berdasarkan kondisi:
+        - Jika match_count > 0 (YA): Nama, Kontak, Skill, Skill Required, Status, Persentase
+        - Jika match_count = 0 (TIDAK): Nama, Kontak saja
+        """
         response_data = {
             'nama': self.extracted_info['nama'],
             'kontak': self.extracted_info['kontak']
@@ -416,9 +432,11 @@ class CVMatchingSystem:
             return False
     
     def process(self, api_url=None, cv_path=None, job_data=None):
-        """Main process sesuai flowchart lengkap"""
+        """
+        Main process sesuai flowchart lengkap
+        """
         print("=" * 70)
-        print("🚀 CV MATCHING SYSTEM")
+        print("🚀 CV MATCHING SYSTEM - MULAI")
         print("=" * 70)
         
         # Step 1 & 2: Request dan validasi data
@@ -451,8 +469,8 @@ class CVMatchingSystem:
                 'success': False,
                 'error': 'CV tidak dapat dibaca',
                 'error_code': 'UNREADABLE_CV',
-                'details': 'File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected.',
-                'suggestion': 'Silakan upload ulang CV dalam format PDF text-based'
+                'details': 'File PDF tidak dapat diekstrak. Kemungkinan: PDF scan/image (tidak didukung), file corrupt, atau password-protected. Solusi: Upload CV dalam format PDF text-based.',
+                'suggestion': 'Silakan upload ulang CV dalam format PDF yang dapat di-copy text-nya (bukan hasil scan/foto)'
             }
         
         # Step 6: Pre-processing Text
@@ -468,247 +486,34 @@ class CVMatchingSystem:
         response_data = self.prepare_response()
         response_data['success'] = True
         
+        print("\n" + "=" * 70)
+        print("📊 HASIL AKHIR")
+        print("=" * 70)
+        print(json.dumps(response_data, indent=2, ensure_ascii=False))
         print("=" * 70)
         
         return response_data
 
 
-# ============================================
-# BATCH CV PROCESSOR CLASS
-# ============================================
-
-class BatchCVProcessor:
-    def __init__(self, cv_folder, job_data):
-        """
-        Inisialisasi Batch CV Processor
-        
-        Args:
-            cv_folder: Path ke folder yang berisi CV-CV (PDF)
-            job_data: Data lowongan kerja (job_title, required_skill)
-        """
-        self.cv_folder = cv_folder
-        self.job_data = job_data
-        self.results = []
-        self.summary = {
-            'total_cv': 0,
-            'processed': 0,
-            'recommended': 0,
-            'not_recommended': 0,
-            'errors': 0
-        }
-    
-    def get_cv_files(self):
-        """Ambil semua file PDF di folder"""
-        cv_folder_path = Path(self.cv_folder)
-        
-        if not cv_folder_path.exists():
-            print(f"❌ Error: Folder '{self.cv_folder}' tidak ditemukan!")
-            return []
-        
-        # Ambil semua file .pdf
-        pdf_files = list(cv_folder_path.glob('*.pdf'))
-        
-        if not pdf_files:
-            print(f"❌ Error: Tidak ada file PDF di folder '{self.cv_folder}'")
-            return []
-        
-        print(f"📁 Ditemukan {len(pdf_files)} file CV dalam folder")
-        return pdf_files
-    
-    def process_single_cv(self, cv_path, index):
-        """Process single CV"""
-        print(f"\n{'='*70}")
-        print(f"🔄 [{index}] Processing: {cv_path.name}")
-        print(f"{'='*70}")
-        
-        try:
-            # Buat instance baru untuk setiap CV
-            system = CVMatchingSystem()
-            
-            # Process CV
-            result = system.process(cv_path=str(cv_path), job_data=self.job_data)
-            
-            # Tambahkan metadata
-            result['cv_filename'] = cv_path.name
-            result['cv_index'] = index
-            
-            # Update summary
-            if result.get('success'):
-                self.summary['processed'] += 1
-                
-                # Check jika recommended atau tidak
-                if result.get('status') == 'RECOMMENDED':
-                    self.summary['recommended'] += 1
-                    print(f"✅ [{index}] RECOMMENDED - {result.get('nama', 'N/A')}")
-                else:
-                    self.summary['not_recommended'] += 1
-                    print(f"⚠️  [{index}] NOT RECOMMENDED - {result.get('nama', 'N/A')}")
-            else:
-                self.summary['errors'] += 1
-                print(f"❌ [{index}] ERROR - {result.get('error', 'Unknown error')}")
-            
-            return result
-        
-        except Exception as e:
-            self.summary['errors'] += 1
-            error_result = {
-                'success': False,
-                'cv_filename': cv_path.name,
-                'cv_index': index,
-                'error': str(e),
-                'error_code': 'PROCESSING_ERROR'
-            }
-            print(f"❌ [{index}] EXCEPTION - {str(e)}")
-            return error_result
-    
-    def process_all(self):
-        """Process semua CV di folder"""
-        print("=" * 70)
-        print("🚀 BATCH CV PROCESSING - START")
-        print("=" * 70)
-        print(f"📋 Job Title: {self.job_data.get('job_title')}")
-        print(f"📋 Required Skills: {', '.join(self.job_data.get('required_skill', [])) if self.job_data.get('required_skill') else 'Tidak ada'}")
-        print("=" * 70)
-        
-        # Get all CV files
-        cv_files = self.get_cv_files()
-        
-        if not cv_files:
-            return
-        
-        self.summary['total_cv'] = len(cv_files)
-        
-        # Process each CV
-        for idx, cv_path in enumerate(cv_files, start=1):
-            result = self.process_single_cv(cv_path, idx)
-            self.results.append(result)
-        
-        # Print summary
-        self.print_summary()
-        
-        return self.results
-    
-    def print_summary(self):
-        """Print ringkasan hasil processing"""
-        print("\n" + "=" * 70)
-        print("📊 SUMMARY - BATCH PROCESSING")
-        print("=" * 70)
-        print(f"Total CV: {self.summary['total_cv']}")
-        print(f"Berhasil Diproses: {self.summary['processed']}")
-        print(f"Recommended: {self.summary['recommended']} ({self.summary['recommended']/self.summary['total_cv']*100:.1f}%)")
-        print(f"Not Recommended: {self.summary['not_recommended']} ({self.summary['not_recommended']/self.summary['total_cv']*100:.1f}%)")
-        print(f"Error: {self.summary['errors']}")
-        print("=" * 70)
-    
-    def get_recommended_candidates(self):
-        """Get list kandidat yang recommended"""
-        recommended = [
-            r for r in self.results 
-            if r.get('success') and r.get('status') == 'RECOMMENDED'
-        ]
-        return recommended
-    
-    def get_not_recommended_candidates(self):
-        """Get list kandidat yang not recommended"""
-        not_recommended = [
-            r for r in self.results 
-            if r.get('success') and r.get('status') != 'RECOMMENDED'
-        ]
-        return not_recommended
-    
-    def save_results(self, output_file='batch_results.json'):
-        """Simpan hasil ke file JSON"""
-        output_data = {
-            'job_info': self.job_data,
-            'processing_date': datetime.now().isoformat(),
-            'summary': self.summary,
-            'results': self.results
-        }
-        
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(output_data, f, indent=2, ensure_ascii=False)
-        
-        print(f"\n💾 Hasil disimpan ke: {output_file}")
-    
-    def save_recommended_only(self, output_file='recommended_candidates.json'):
-        """Simpan hanya kandidat yang recommended"""
-        recommended = self.get_recommended_candidates()
-        
-        output_data = {
-            'job_info': self.job_data,
-            'processing_date': datetime.now().isoformat(),
-            'total_recommended': len(recommended),
-            'candidates': recommended
-        }
-        
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(output_data, f, indent=2, ensure_ascii=False)
-        
-        print(f"💾 Kandidat recommended disimpan ke: {output_file}")
-    
-    def print_recommended_list(self):
-        """Print list kandidat yang recommended"""
-        recommended = self.get_recommended_candidates()
-        
-        if not recommended:
-            print("\n⚠️  Tidak ada kandidat yang recommended")
-            return
-        
-        print("\n" + "=" * 70)
-        print(f"✅ KANDIDAT RECOMMENDED ({len(recommended)} orang)")
-        print("=" * 70)
-        
-        for idx, candidate in enumerate(recommended, start=1):
-            print(f"\n{idx}. {candidate.get('nama', 'N/A')}")
-            print(f"   File: {candidate.get('cv_filename')}")
-            print(f"   Email: {candidate.get('kontak', {}).get('email', 'N/A')}")
-            print(f"   Phone: {candidate.get('kontak', {}).get('phone', 'N/A')}")
-            print(f"   Skills: {', '.join(candidate.get('skill', []))}")
-            print(f"   Match: {candidate.get('persentase', 'N/A')}")
-        
-        print("=" * 70)
-
-
-# ============================================
-# MAIN - CONTOH PENGGUNAAN
-# ============================================
-
+# Contoh penggunaan
 if __name__ == "__main__":
+    system = CVMatchingSystem()
     
-    # ========================================
-    # KONFIGURASI
-    # ========================================
-    
-    # 1. Folder yang berisi CV-CV (PDF)
-    CV_FOLDER = "cv_batch"  # Ganti dengan nama folder Anda
-    
-    # 2. Data lowongan kerja
-    job_data = {
-        'job_title': 'Operator Sablon',
-        'required_skill': []  # Kosongkan jika hanya match dengan job title
+    # Mode 1: Dengan Required Skills
+    print("\n📋 TEST 1: Dengan Required Skills")
+    print("-" * 70)
+    job_data_1 = {
+        'job_title': 'Backend Developer',
+        'required_skill': ['Python', 'JavaScript', 'SQL', 'Docker', 'API']
     }
+    result_1 = system.process(cv_path="cv.pdf", job_data=job_data_1)
     
-    # Atau dengan required skills:
-    # job_data = {
-    #     'job_title': 'Backend Developer',
-    #     'required_skill': ['Python', 'JavaScript', 'SQL', 'Docker']
-    # }
-    
-    # ========================================
-    # PROCESSING
-    # ========================================
-    
-    # Buat instance processor
-    processor = BatchCVProcessor(CV_FOLDER, job_data)
-    
-    # Process semua CV
-    results = processor.process_all()
-    
-    # Print list kandidat recommended
-    processor.print_recommended_list()
-    
-    # Simpan hasil
-    processor.save_results('batch_results.json')
-    processor.save_recommended_only('recommended_candidates.json')
-    
-    print("\n✅ Batch processing selesai!")
+    # Mode 2: Tanpa Required Skills (hanya Job Title)
+    print("\n\n📋 TEST 2: Tanpa Required Skills (Job Title saja)")
+    print("-" * 70)
+    system2 = CVMatchingSystem()
+    job_data_2 = {
+        'job_title': 'OPERATOR SABLON',
+        'required_skill': []  # Kosong
+    }
+    result_2 = system2.process(cv_path="cv.pdf", job_data=job_data_2)
