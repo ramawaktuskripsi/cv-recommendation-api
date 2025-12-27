@@ -4,6 +4,9 @@ flask-cors==4.0.0
 gunicorn==21.2.0
 werkzeug==2.3.0
 
+# Library Pendukung (WAJIB DIKUNCI)
+numpy==1.26.4
+
 # NLP & NER
 spacy==3.7.0
 nltk==3.8.1
