@@ -12,7 +12,18 @@ from rapidfuzz import fuzz
 # INITIALIZE FLASK APP
 # ============================================
 app = Flask(__name__)
-CORS(app)
+
+# CORS Configuration
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "http://localhost:3000",  # Local development
+            "https://kerjasimpel.vercel.app",   # Vercel deployments
+        ],
+        "methods": ["GET", "POST"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # NOTE: spaCy disabled untuk Vercel (numpy incompatibility issue)
 # Menggunakan Regex-only untuk ekstraksi nama
@@ -52,7 +63,7 @@ class CVMatchingSystem:
     def download_cv_from_url(self, cv_url):
         """Download CV dari URL Supabase"""
         try:
-            print(f"📥 Downloading CV from: {cv_url}")
+            print(f" Downloading CV from: {cv_url}")
             response = requests.get(cv_url, timeout=30)
             response.raise_for_status()
             
@@ -61,11 +72,11 @@ class CVMatchingSystem:
             temp_file.write(response.content)
             temp_file.close()
             
-            print(f"✓ CV downloaded to: {temp_file.name}")
+            print(f"CV downloaded to: {temp_file.name}")
             return temp_file.name
         
         except requests.exceptions.RequestException as e:
-            print(f"❌ Error downloading CV: {e}")
+            print(f"Error downloading CV: {e}")
             return None
     
     def extract_cv_raw_text(self, cv_path):
@@ -83,14 +94,14 @@ class CVMatchingSystem:
                 
                 MIN_CHARS = 50
                 if len(self.cv_raw_text.strip()) < MIN_CHARS:
-                    print(f"❌ CV tidak dapat dibaca (hanya {len(self.cv_raw_text.strip())} karakter)")
+                    print(f"CV tidak dapat dibaca (hanya {len(self.cv_raw_text.strip())} karakter)")
                     return False
                 
-                print(f"✓ CV extracted ({len(self.cv_raw_text)} karakter)")
+                print(f"CV extracted ({len(self.cv_raw_text)} karakter)")
                 return True
         
         except Exception as e:
-            print(f"❌ Error extracting CV: {e}")
+            print(f"Error extracting CV: {e}")
             return False
     
     def preprocess_text(self):
@@ -109,7 +120,7 @@ class CVMatchingSystem:
         text = '\n'.join(lines)
         
         self.cv_processed_text = text.strip()
-        print(f"✓ Pre-processing done ({len(self.cv_processed_text)} karakter)")
+        print(f"Pre-processing done ({len(self.cv_processed_text)} karakter)")
         return self.cv_processed_text
     
     def extract_name_regex(self, text):
@@ -270,14 +281,14 @@ class CVMatchingSystem:
     
     def extract_information(self):
         """Extract semua informasi (Nama, Kontak, Skills)"""
-        print("\n🔍 Extracting information...")
+        print("\n Extracting information...")
         
         self.extract_name()
-        print(f"  ✓ Nama: {self.extracted_info['nama']}")
+        print(f"  Nama: {self.extracted_info['nama']}")
         
         contact = self.extract_contact()
-        print(f"  ✓ Email: {contact.get('email', 'N/A')}")
-        print(f"  ✓ Phone: {contact.get('phone', 'N/A')}")
+        print(f"  Email: {contact.get('email', 'N/A')}")
+        print(f"  Phone: {contact.get('phone', 'N/A')}")
         
         # Extract skills
         if self.job_data.get('required_skill'):
@@ -285,11 +296,11 @@ class CVMatchingSystem:
         else:
             skills = self.extract_skills(self.job_data['job_title'])
         
-        print(f"  ✓ Skills: {', '.join(skills) if skills else 'None'}")
+        print(f"  Skills: {', '.join(skills) if skills else 'None'}")
     
     def skill_matching(self):
         """Skill matching"""
-        print("\n🎯 Skill matching...")
+        print("\n Skill matching...")
         
         cv_skills = self.extracted_info['skills']
         required_skills = self.job_data.get('required_skill', [])
@@ -314,7 +325,7 @@ class CVMatchingSystem:
             'total_required': total_required
         }
         
-        print(f"  ✓ Matched: {len(matched_skills)}/{total_required}")
+        print(f"  Matched: {len(matched_skills)}/{total_required}")
     
     def calculate_percentage(self):
         """Calculate percentage"""
@@ -340,9 +351,9 @@ class CVMatchingSystem:
                 'status': 'RECOMMENDED',
                 'persentase': f"{percentage}%"
             })
-            print(f"\n✅ Status: RECOMMENDED ({percentage}%)")
+            print(f"\nStatus: RECOMMENDED ({percentage}%)")
         else:
-            print(f"\n❌ Status: NOT RECOMMENDED")
+            print(f"\nStatus: NOT RECOMMENDED")
         
         return response_data
     
@@ -407,9 +418,9 @@ class CVMatchingSystem:
             try:
                 if cv_path and os.path.exists(cv_path):
                     os.remove(cv_path)
-                    print(f"🗑️  Temp file deleted: {cv_path}")
+                    print(f"Temp file deleted: {cv_path}")
             except Exception as e:
-                print(f"⚠️  Failed to delete temp file: {e}")
+                print(f" Failed to delete temp file: {e}")
 
 
 # ============================================
@@ -420,7 +431,7 @@ class CVMatchingSystem:
 def home():
     """Health check endpoint"""
     return jsonify({
-        'message': 'CV Matching API is running',
+        'message': 'Hello Sir, CV Matcher API is running',
         'version': '1.0.0',
         'status': 'healthy',
         'endpoints': {
@@ -507,7 +518,7 @@ def match_cv():
             return jsonify(result), 400
     
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        print(f"Unexpected error: {e}")
         return jsonify({
             'success': False,
             'error': str(e),
