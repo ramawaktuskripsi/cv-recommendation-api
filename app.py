@@ -7,7 +7,6 @@ import tempfile
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from rapidfuzz import fuzz
-import spacy
 
 # ============================================
 # INITIALIZE FLASK APP
@@ -15,11 +14,9 @@ import spacy
 app = Flask(__name__)
 CORS(app)
 
-# Load spaCy model
-try:
-    nlp = spacy.load('en_core_web_sm')
-except OSError:
-    nlp = None
+# NOTE: spaCy disabled untuk Vercel (numpy incompatibility issue)
+# Menggunakan Regex-only untuk ekstraksi nama
+nlp = None
 
 # ============================================
 # CV MATCHING SYSTEM CLASS
@@ -116,32 +113,69 @@ class CVMatchingSystem:
         return self.cv_processed_text
     
     def extract_name_regex(self, text):
-        """Extract nama dengan regex"""
+        """Extract nama dengan enhanced regex - multiple heuristics"""
         lines = text.split('\n')
-        for line in lines[:10]:
+        
+        # Skip keywords yang umum di CV (bukan nama)
+        skip_keywords = [
+            'cv', 'curriculum', 'resume', 'contact', 'email', 'phone', 'address',
+            'experience', 'education', 'skill', 'objective', 'summary', 'profile',
+            'tentang', 'profil', 'kontak', 'alamat', 'pendidikan', 'pengalaman',
+            'keahlian', 'portofolio', 'sertifikat', 'about', 'personal', 'data'
+        ]
+        
+        candidates = []
+        
+        # Cek 15 baris pertama CV
+        for i, line in enumerate(lines[:15]):
             line = line.strip()
-            if len(line.split()) >= 2 and len(line.split()) <= 4:
+            
+            # Skip baris kosong atau terlalu pendek/panjang
+            if len(line) < 5 or len(line) > 50:
+                continue
+            
+            # Skip jika mengandung keyword CV umum
+            if any(kw in line.lower() for kw in skip_keywords):
+                continue
+            
+            # Skip jika ada angka banyak (kemungkinan phone/date)
+            if re.search(r'\d{3,}', line):
+                continue
+            
+            # Skip jika ada email atau URL
+            if re.search(r'@|http|www\.', line):
+                continue
+            
+            # Cek pattern nama Indonesia (2-4 kata)
+            words = line.split()
+            if 2 <= len(words) <= 4:
+                # Harus title case atau uppercase
+                if line.isupper() or line.istitle():
+                    # Tidak boleh ada simbol aneh
+                    if not re.search(r'[|:;#$%^&*()+=\[\]{}]', line):
+                        # Score berdasarkan posisi (lebih atas = lebih prioritas)
+                        score = 100 - i  # Baris 1 = score 100, baris 2 = score 99, dst
+                        candidates.append((score, line))
+        
+        # Return kandidat dengan score tertinggi
+        if candidates:
+            candidates.sort(reverse=True, key=lambda x: x[0])
+            return candidates[0][1]
+        
+        # Fallback: cek 5 baris pertama saja, ambil yang uppercase/title
+        for line in lines[:5]:
+            line = line.strip()
+            words = line.split()
+            if 2 <= len(words) <= 4:
                 if line.isupper() or line.istitle():
                     if not re.search(r'\d{3,}|@', line):
                         return line
-        return None
-    
-    def extract_name_ner(self, text):
-        """Extract nama dengan NER"""
-        if not self.nlp:
-            return None
         
-        doc = self.nlp(text[:500])
-        for ent in doc.ents:
-            if ent.label_ == 'PERSON':
-                return ent.text
         return None
     
     def extract_name(self):
-        """Extract nama (Regex + NER)"""
+        """Extract nama (Enhanced Regex Only - optimized untuk Vercel)"""
         nama = self.extract_name_regex(self.cv_processed_text)
-        if not nama:
-            nama = self.extract_name_ner(self.cv_processed_text)
         
         self.extracted_info['nama'] = nama if nama else "Tidak ditemukan"
         return nama
@@ -485,9 +519,8 @@ def match_cv():
 # VERCEL HANDLER (PENTING!)
 # ============================================
 
-# Untuk Vercel, export app sebagai handler
-# Jangan gunakan app.run() di sini
-handler = app
+# JANGAN gunakan app.run() untuk Vercel
+# Export app langsung tanpa handler wrapper
 
 # Untuk local testing
 if __name__ == '__main__':
