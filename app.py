@@ -261,10 +261,131 @@ class CVMatchingSystem:
         self.cv_processed_text = text.strip()
         print(f"Pre-processing done ({len(self.cv_processed_text)} karakter)")
         return self.cv_processed_text
+
+    @staticmethod
+    def normalize_name_candidate(value):
+        """Rapikan kandidat nama tanpa mengubah kapitalisasinya."""
+        return re.sub(r'\s+', ' ', value).strip(" \t:-|")
+
+    def is_valid_name_candidate(
+        self,
+        value,
+        allow_single_word=False,
+        require_name_case=True
+    ):
+        """Validasi kandidat nama dan tolak headline/section CV."""
+        candidate = self.normalize_name_candidate(value)
+        words = candidate.split()
+        min_words = 1 if allow_single_word else 2
+
+        if not min_words <= len(words) <= 5:
+            return False
+        if len(candidate) > 60:
+            return False
+        if re.search(r'\d|@|https?://|www\.', candidate, re.IGNORECASE):
+            return False
+        if any(
+            not (
+                character.isalpha()
+                or character.isspace()
+                or character in ".'-"
+            )
+            for character in candidate
+        ):
+            return False
+        if require_name_case and not (
+            candidate.isupper() or candidate.istitle()
+        ):
+            return False
+
+        blocked_phrases = {
+            'curriculum vitae',
+            'daftar riwayat hidup',
+            'fresh graduate',
+            'lulusan baru',
+            'personal profile',
+            'profil pribadi',
+            'tentang saya',
+        }
+        blocked_words = {
+            'about', 'address', 'alamat', 'baru', 'contact', 'curriculum',
+            'data', 'developer', 'education', 'email', 'engineer',
+            'experience', 'fresh', 'graduate', 'keahlian', 'kontak',
+            'lulusan', 'manager', 'objective', 'operator', 'pendidikan',
+            'pengalaman', 'personal', 'phone', 'pribadi', 'profile',
+            'profil', 'resume', 'skill', 'staff', 'summary', 'tentang',
+            'vitae',
+        }
+        normalized_words = {
+            word.lower().strip(".'-") for word in words
+        }
+
+        if candidate.lower() in blocked_phrases:
+            return False
+        if normalized_words & blocked_words:
+            return False
+
+        return True
+
+    def extract_labeled_name(self, lines):
+        """Prioritaskan nama dari field eksplisit seperti 'Nama: ...'."""
+        label_pattern = re.compile(
+            r'^(?:nama(?:\s+lengkap)?|name)\s*[:\-]\s*(.+)$',
+            re.IGNORECASE
+        )
+
+        for line in lines[:30]:
+            match = label_pattern.match(line.strip())
+            if not match:
+                continue
+
+            candidate = self.normalize_name_candidate(match.group(1))
+            if self.is_valid_name_candidate(
+                candidate,
+                allow_single_word=True,
+                require_name_case=False
+            ):
+                return candidate
+
+        return None
+
+    def extract_split_header_name(self, lines):
+        """Gabungkan nama header yang diekstrak menjadi beberapa baris."""
+        header_lines = [line.strip() for line in lines[:8] if line.strip()]
+
+        for start_index in range(min(5, len(header_lines))):
+            name_parts = []
+
+            for line in header_lines[start_index:start_index + 5]:
+                if len(line.split()) != 1:
+                    break
+                if not self.is_valid_name_candidate(
+                    line,
+                    allow_single_word=True
+                ):
+                    break
+                name_parts.append(line)
+
+            if len(name_parts) >= 2:
+                candidate = self.normalize_name_candidate(
+                    ' '.join(name_parts)
+                )
+                if self.is_valid_name_candidate(candidate):
+                    return candidate
+
+        return None
     
     def extract_name_regex(self, text):
         """Extract nama dengan enhanced regex - multiple heuristics"""
         lines = text.split('\n')
+
+        labeled_name = self.extract_labeled_name(lines)
+        if labeled_name:
+            return labeled_name
+
+        split_header_name = self.extract_split_header_name(lines)
+        if split_header_name:
+            return split_header_name
         
         # Skip keywords yang umum di CV (bukan nama)
         skip_keywords = [
@@ -299,13 +420,10 @@ class CVMatchingSystem:
             # Cek pattern nama Indonesia (2-4 kata)
             words = line.split()
             if 2 <= len(words) <= 4:
-                # Harus title case atau uppercase
-                if line.isupper() or line.istitle():
-                    # Tidak boleh ada simbol aneh
-                    if not re.search(r'[|:;#$%^&*()+=\[\]{}]', line):
-                        # Score berdasarkan posisi (lebih atas = lebih prioritas)
-                        score = 100 - i  # Baris 1 = score 100, baris 2 = score 99, dst
-                        candidates.append((score, line))
+                if self.is_valid_name_candidate(line):
+                    # Score berdasarkan posisi (lebih atas = lebih prioritas)
+                    score = 100 - i  # Baris 1 = score 100, baris 2 = score 99, dst
+                    candidates.append((score, line))
         
         # Return kandidat dengan score tertinggi
         if candidates:
@@ -315,11 +433,8 @@ class CVMatchingSystem:
         # Fallback: cek 5 baris pertama saja, ambil yang uppercase/title
         for line in lines[:5]:
             line = line.strip()
-            words = line.split()
-            if 2 <= len(words) <= 4:
-                if line.isupper() or line.istitle():
-                    if not re.search(r'\d{3,}|@', line):
-                        return line
+            if self.is_valid_name_candidate(line):
+                return line
         
         return None
     

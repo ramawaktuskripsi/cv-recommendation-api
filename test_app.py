@@ -6,6 +6,55 @@ from unittest.mock import MagicMock, patch
 from app import CVMatchingSystem, CVURLValidationError, app
 
 
+class NameExtractionTests(unittest.TestCase):
+    def setUp(self):
+        self.matcher = CVMatchingSystem()
+
+    def test_prioritizes_explicit_name_label_over_cv_headline(self):
+        text = (
+            "Alif\n"
+            "Pramana\n"
+            "Lulusan Baru\n"
+            "DATA PRIBADI\n"
+            "Nama : Alif Pramana\n"
+            "Email : alifp8836@gmail.com"
+        )
+
+        result = self.matcher.extract_name_regex(text)
+
+        self.assertEqual(result, "Alif Pramana")
+
+    def test_combines_name_split_across_header_lines(self):
+        text = (
+            "Alif\n"
+            "Pramana\n"
+            "Lulusan Baru\n"
+            "Email : alifp8836@gmail.com"
+        )
+
+        result = self.matcher.extract_name_regex(text)
+
+        self.assertEqual(result, "Alif Pramana")
+
+    def test_rejects_fresh_graduate_as_name(self):
+        text = (
+            "Fresh Graduate\n"
+            "Budi Santoso\n"
+            "budi@example.com"
+        )
+
+        result = self.matcher.extract_name_regex(text)
+
+        self.assertEqual(result, "Budi Santoso")
+
+    def test_accepts_single_word_name_from_explicit_label(self):
+        text = "DATA PRIBADI\nNama: Suharto\nEmail: test@example.com"
+
+        result = self.matcher.extract_name_regex(text)
+
+        self.assertEqual(result, "Suharto")
+
+
 class SkillMatchingTests(unittest.TestCase):
     def test_job_title_fallback_uses_each_title_word_as_target(self):
         matcher = CVMatchingSystem()
