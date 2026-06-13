@@ -1,8 +1,20 @@
 {
-  "nama": "Laksmana Rakho",
+  "nama": "CURRICULUM VITAE",
   "kontak": {
-    "email": "laksmanarakho@gmail.com",
-    "phone": "+6282146150660"
+    "email": "denysetiawan2909@gmail.com",
+    "phone": "+62812-7081-007"
   },
+  "skill": [
+    "Router",
+    "Juniper",
+    "Cisco"
+  ],
+  "skill_required": [
+    "Router",
+    "Cisco",
+    "Juniper"
+  ],
+  "status": "RECOMMENDED",
+  "persentase": "100.0%",
   "success": true
 }

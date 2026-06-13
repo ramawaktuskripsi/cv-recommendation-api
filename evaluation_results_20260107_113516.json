@@ -1,0 +1,986 @@
+{
+  "timestamp": "20260107_113516",
+  "required_skills": [
+    "operator sablon",
+    "menyablon",
+    "sablon manual"
+  ],
+  "total_cv": 70,
+  "metrics": {
+    "total_tp": 0,
+    "total_fp": 1,
+    "total_fn": 0,
+    "total_tn": 119,
+    "precision": 0.0,
+    "recall": 0,
+    "f1_score": 0,
+    "accuracy": 99.17
+  },
+  "results": [
+    {
+      "no": 1,
+      "file": "DFBi8CDS5tOIrcuyF7uwqezLKOPuGvjf.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "api",
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 2,
+      "file": "Ds55jWfh3KuZUSvSMWe26B7x4udHjBuq.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 3,
+      "file": "Dw5A6BtRcpeBGOA4RiahJchIxZV6D4lQ.pdf",
+      "status": "OK",
+      "nama": "SITI NURHAYATI",
+      "email": "hayati5823877@gmail.com",
+      "phone": "083187032860",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 4,
+      "file": "E4NoCe6kFX0DL5cAtCaaB7yn14SIhedY.pdf",
+      "status": "OK",
+      "nama": "RIKI DARMAWAN",
+      "email": "rikyyydn@gmail.com",
+      "phone": "025 2018-2021",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "api",
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 5,
+      "file": "E7qGQFQbIlyGzB2snu4bF9iKZgY6CiND.pdf",
+      "status": "OK",
+      "nama": "ASEP SUGIARTO",
+      "email": "sugiartoasep109@gmail.com",
+      "phone": "081-295-755",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "leadership",
+        "communication"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 6,
+      "file": "Eem8huxYRGapx9VE7AT2UGkZTM6KkrDv.pdf",
+      "status": "OK",
+      "nama": "RIFQI ‘AQIL MUBARAK",
+      "email": "rifqiaqil17@gmail.com",
+      "phone": "0895634790400",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "excel",
+        "word",
+        "teamwork"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 7,
+      "file": "F5LfbESfKbcffqxnYkrYevgS8mwjRIBO.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "api",
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 8,
+      "file": "GOkzSlz2JaVOhOeXgckvOV4PmCJWx8FV.pdf",
+      "status": "OK",
+      "nama": "KEC. GEMPOL KAB. CIREBON",
+      "email": "vindiagustin59@gmail.com",
+      "phone": "+62 896-0240-9903",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 9,
+      "file": "GjlZ5NYpKG9VjZOMik84VLSOg3iB70Ft.pdf",
+      "status": "OK",
+      "nama": "Cucu Nurhayati",
+      "email": "cucunurhayati37726@gmail.com",
+      "phone": "083157120135",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "git",
+        "marketing"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 10,
+      "file": "H3FTKkr7IpgX8QtM8lluWSrwhRGTzxEk.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 11,
+      "file": "HFhSOKINVxi5NcHv50fjJYVYwkuhopPd.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 12,
+      "file": "HP0M9Miolsi8vp0m8V4z32VTrsP98YWo.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 13,
+      "file": "Hysr8SiDZ9JYSKJE3X3KNd6W3g9UFuEH.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 14,
+      "file": "JrGLCPx3FP8fEPK7H9gqNeUN1sDu0sKG.pdf",
+      "status": "OK",
+      "nama": "ATIKAH NURFABILA",
+      "email": "nurfabila21@gmail.com",
+      "phone": "+62 895 3532 0361",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 15,
+      "file": "KpJIZdd7GT6FI2mrKVYue7WhxTtpj7cE.pdf",
+      "status": "OK",
+      "nama": "UMAR ARDIANSYAH",
+      "email": "ajaumar863@gmail.com",
+      "phone": "0838-3016-1502",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "qa"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 16,
+      "file": "KxuoGugC4N1Z4NdeJgSpN7QuIli7KcPk.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 17,
+      "file": "LEE0TjHtVA6VCAU88Q6sI4Vc0nF2aVJK.pdf",
+      "status": "OK",
+      "nama": "YUNI YUNINGSIH",
+      "email": "yyuni6808@gmail.com",
+      "phone": "089643809287",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 18,
+      "file": "N21XGTZr5b0m8xd6itW6GWZoEBxUdKYM.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 19,
+      "file": "O8M8d5WNj3Tw3g7dUKlxEEUjK6TvCuje.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 20,
+      "file": "OYBFOgxOGLtg9cKZVhSqwk8ziGpNZNG4.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 21,
+      "file": "OezLN4QriafInwucsDZbG817mvC651CL.pdf",
+      "status": "OK",
+      "nama": "ZAHRA NUR APRINI",
+      "email": "zahranuraprini269@gmail.com",
+      "phone": "083878084438",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 22,
+      "file": "Ow2K7fMEalqHB59HVoBSkIRmbqK9X4QE.pdf",
+      "status": "OK",
+      "nama": "Lulusan Baru",
+      "email": "alifp8836@gmail.com",
+      "phone": "083146819750",
+      "detected_skills": [
+        "operator sablon"
+      ],
+      "all_skills_in_cv": [
+        "go",
+        "operator",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 23,
+      "file": "PMPA7LNUc4fKhPxnASjDivdvVfu17CvV.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 24,
+      "file": "Q2OPmOUP8qLDBlTMF8cDyEtszjLSGFWK.pdf",
+      "status": "OK",
+      "nama": "FITRIA RAHMANDANI",
+      "email": "fitriarahmandani7@gmail.com",
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "git"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 25,
+      "file": "QU4CHpqM4E6EOaUsMP9X7MBD2KrGnv4c.pdf",
+      "status": "OK",
+      "nama": "AGUS PRAMANA",
+      "email": "aguspramanaa23@gmail.com",
+      "phone": "083142566248",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 26,
+      "file": "Qh0OpJlCfytWaz6u134Vkus9wncd6s4w.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "api",
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 27,
+      "file": "R6ZDdrLDTUKKMNcQeAqLb4L7k6OOU8Ys.pdf",
+      "status": "OK",
+      "nama": "ZAHRA SRI RAHMAH",
+      "email": "zahrasrirahma@gmail.com",
+      "phone": "082321454263",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "api",
+        "excel",
+        "word",
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 28,
+      "file": "RhnqEALNeVYWBxmbXhQWA4QAqlvBQ6sK.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 29,
+      "file": "RkKH19wtgWLIqHpn8kuIgyUAhqayjzV9.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "selinaherpiyani@gmail.com",
+      "phone": "083120365023",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 30,
+      "file": "S2aFW7Yu95HsaKBYyfq7qdptM0hNpPAN.pdf",
+      "status": "OK",
+      "nama": "Asep Rosihin",
+      "email": "aseprosihin23@gmail.com",
+      "phone": "015-2018 0812",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "canva",
+        "sales"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 31,
+      "file": "e0zFweeb5nZsBOU0xsclCrUlrOHJQAcQ.pdf",
+      "status": "OK",
+      "nama": "Brebes, Jawa Tengah.",
+      "email": "kurmila265@gmail.com",
+      "phone": "082324380847",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "excel",
+        "word",
+        "quality control"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 32,
+      "file": "ebXxrOmCZBQsQT68GfCL6ZaMhwiNcHwc.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 33,
+      "file": "fk3M2OycOGWCHqpkmVzgW8wbNOcUCSRy.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 34,
+      "file": "fpcUNOfl5u7oF6858WNs8zGLNZHpLCkf.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "triliyani167@gmail.com",
+      "phone": "+62 831 4649 6971",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 35,
+      "file": "gK0gbRIkj5BChIJnFjzxE6F9IuoMeAeI.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "ahmadfathurrojy@gmail.com",
+      "phone": "089660172413",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 36,
+      "file": "gZgRbLZyxf5bg6kBUOCWpmKIqCchMY78.pdf",
+      "status": "OK",
+      "nama": "SARI KAMELIA",
+      "email": "solehasepanjangjaman34567@gmail.com",
+      "phone": "+62 831-4147-9010",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 37,
+      "file": "gZwGerw7cFqPqsy0hKksW09ElbR8qywq.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 38,
+      "file": "gjy5ePDBQRW16DQ1F5u77OqZENvuioOo.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 39,
+      "file": "hpw1WH6cae8K2O5dAs8xJsosQybCNzoc.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 40,
+      "file": "iErUFn5MwcVUCT91JwTSEnlfQZd0YR01.pdf",
+      "status": "OK",
+      "nama": "Dedi Yarmudik",
+      "email": "dedia7162@gmail.com",
+      "phone": "+6283184903013",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 41,
+      "file": "iPE12heQ0wPetiq4eVbMs4A4qUpCVcW5.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 42,
+      "file": "ikJn2NPZm3z2Ldzeutm89x3snVa7elIZ.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 43,
+      "file": "jivUml3FHcHv9F8bhyaRf6uGYrG8Wwrh.pdf",
+      "status": "OK",
+      "nama": "Tempat, Tanggal Lahir",
+      "email": "muhammadluckyhermawan1@gmail.com",
+      "phone": "083826351168",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 44,
+      "file": "k0LdY9OZNYvlwE1Cvy1aHRgao72PMKGL.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 45,
+      "file": "kHryMYMMhCsIh2hWaOr2QUX9vepZeh9W.pdf",
+      "status": "OK",
+      "nama": "Kabupaten Cirebon",
+      "email": null,
+      "phone": "08990356644",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 46,
+      "file": "kZUXg7QagenyzEyYr2B6eeylpwx8HmtH.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 47,
+      "file": "krmrqlvEsJD0d11OzIgZ2R9wQ1KwUDLJ.pdf",
+      "status": "OK",
+      "nama": "Dengan Hormat",
+      "email": null,
+      "phone": "081546756465",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 48,
+      "file": "livaNsDC6BunTvOFaOHKwZ67JwulYfAF.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 49,
+      "file": "m6nuqO5iDrM6BjUsXbHmCHDV12OmM3eC.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 50,
+      "file": "mC1YoivcIHmcRRc1kINtbDnOADz1hLQT.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": null,
+      "phone": "083181135662",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 51,
+      "file": "mlj6bRHmJHKgXPbYRwW4ExDaZgrACRGx.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "adin71270@gmail.com",
+      "phone": "+62 822 1536 3210",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "qc",
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 52,
+      "file": "nCKRg29xTjLyCsE8xW3swBUQGcCtvj2L.pdf",
+      "status": "OK",
+      "nama": "DENI NOVIANDANI",
+      "email": "noviandanideni@gmail.com",
+      "phone": "081319640368",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 53,
+      "file": "nZCW9yGpp1J0ElLf6mxK2SxsDeL9ZhNa.pdf",
+      "status": "OK",
+      "nama": "Di Tempat",
+      "email": null,
+      "phone": "0858-6413-1172",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 54,
+      "file": "ndxdr9SZi0lSDI7uiFqXig87N49ko1hl.pdf",
+      "status": "OK",
+      "nama": "RIWAYAT HIDUP",
+      "email": "sofyancooljaz37@gmail.com",
+      "phone": "0813 1103 2124",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 55,
+      "file": "oBkLcAvzUarSiXFJW1hznbqGR08I3jIK.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "api",
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 56,
+      "file": "oHzvv5FnDb6bMg8EscaEoZ4tuxH5xsf6.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 57,
+      "file": "oJ37TeOhFNLaD5Q0KryHWibOTewfWIgC.pdf",
+      "status": "OK",
+      "nama": "WURI NUROHIM",
+      "email": "nurohimwuri@gmail.com",
+      "phone": "+6289652187467",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "java",
+        "go",
+        "excel",
+        "quality control",
+        "qc",
+        "operator",
+        "sales"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 58,
+      "file": "pMsRt4HykYjKfcx8mSZfxTVhZGnLA6B7.pdf",
+      "status": "OK",
+      "nama": "WURI NUROHIM",
+      "email": "nurohimwuri@gmail.com",
+      "phone": "+6289652187467",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "java",
+        "go",
+        "excel",
+        "quality control",
+        "qc",
+        "operator",
+        "sales"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 59,
+      "file": "pOb4h8iMDSpVz5nMREc3BIIe264DiTCR.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 60,
+      "file": "pkDpUEnbfOzcZSZrydsLuRc0WCbOZIaa.pdf",
+      "status": "OK",
+      "nama": "MAULIDA AL VITO",
+      "email": "maulidaalvito067@gmail.com",
+      "phone": "+6283824950400",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 61,
+      "file": "qYj2dFZZWFyhsuY3SEQ3PDRVTqkLK1WY.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 62,
+      "file": "qfsVJ1wRlvxf29Ynb6QktdLL8FIpWm0L.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 63,
+      "file": "r0MItkVi1rBrZfOt6GqIbWbbvEX22gRn.pdf",
+      "status": "OK",
+      "nama": "Data Pribadi",
+      "email": null,
+      "phone": "083813422961",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 64,
+      "file": "r3JeXJjcIPI4dHP63T9yJaq5nkvkS9us.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 65,
+      "file": "r7ALK6LgoVj8Dp7wgYagFVMZQpEfreWd.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 66,
+      "file": "rJicYsYNRXw1o4zQSSf8bCwn3q0n3mJu.pdf",
+      "status": "OK",
+      "nama": "DE TIRTA",
+      "email": "detirtaonassis70@gmail.com",
+      "phone": "+6281321389516",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "teamwork",
+        "quality control",
+        "qc"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 67,
+      "file": "rYLpPZ5rdX6F2b2Jy9yLcfznexWYP852.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    },
+    {
+      "no": 68,
+      "file": "rs2hgISgkjGoaFpwWYKhZ768XfDsTucB.pdf",
+      "status": "OK",
+      "nama": "Tentang Saya",
+      "email": "tiaraaagustina333@gmail.com",
+      "phone": "+628815248981",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "go",
+        "operator"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 69,
+      "file": "sNKXqYaSutOs8a6FZtD3c9tLlcwuHgcN.pdf",
+      "status": "OK",
+      "nama": "ELIS SETIANINGSIH",
+      "email": "elissetianingsih07@gmail.com",
+      "phone": "0896 9776 6704",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 70,
+      "file": "skXghKi3o1v15i2X4G9IWZnbSeGSVXmm.pdf",
+      "status": "ERROR",
+      "nama": null,
+      "email": null,
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": []
+    }
+  ]
+}

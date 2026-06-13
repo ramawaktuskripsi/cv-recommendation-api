@@ -1,9 +1,11 @@
 import os
-import json
+import ipaddress
 import pdfplumber
 import requests
 import re
+import socket
 import tempfile
+from urllib.parse import urljoin, urlparse
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from rapidfuzz import fuzz
@@ -25,9 +27,17 @@ CORS(app, resources={
     }
 })
 
-# NOTE: spaCy disabled untuk Vercel (numpy incompatibility issue)
-# Menggunakan Regex-only untuk ekstraksi nama
-nlp = None
+MAX_CV_SIZE_BYTES = 10 * 1024 * 1024
+MAX_CV_REDIRECTS = 3
+DEFAULT_ALLOWED_CV_HOSTS = "supabase.co"
+
+
+class CVURLValidationError(ValueError):
+    pass
+
+
+class CVDownloadError(Exception):
+    pass
 
 # ============================================
 # CV MATCHING SYSTEM CLASS
@@ -39,7 +49,8 @@ class CVMatchingSystem:
         self.job_data = {}
         self.extracted_info = {'nama': '', 'kontak': {}, 'skills': []}
         self.match_result = {}
-        self.nlp = nlp
+        self.target_skills = []
+        self.download_error = None
         
         # Synonym mapping
         self.skill_synonyms = {
@@ -60,24 +71,152 @@ class CVMatchingSystem:
             'sablon': ['sablon', 'screen printing', 'printing'],
         }
     
-    def download_cv_from_url(self, cv_url):
-        """Download CV dari URL Supabase"""
+    @staticmethod
+    def validate_cv_url(cv_url):
+        """Validasi URL agar downloader hanya mengakses storage publik yang diizinkan."""
+        if not isinstance(cv_url, str) or not cv_url.strip():
+            raise CVURLValidationError("uri_cv harus berupa URL")
+
         try:
-            print(f" Downloading CV from: {cv_url}")
-            response = requests.get(cv_url, timeout=30)
-            response.raise_for_status()
-            
-            # Simpan ke temporary file
-            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.pdf')
-            temp_file.write(response.content)
-            temp_file.close()
-            
-            print(f"CV downloaded to: {temp_file.name}")
-            return temp_file.name
-        
-        except requests.exceptions.RequestException as e:
+            parsed_url = urlparse(cv_url.strip())
+            port = parsed_url.port
+        except ValueError as exc:
+            raise CVURLValidationError("Format uri_cv tidak valid") from exc
+
+        if parsed_url.scheme != "https":
+            raise CVURLValidationError("uri_cv harus menggunakan HTTPS")
+        if not parsed_url.hostname or parsed_url.username or parsed_url.password:
+            raise CVURLValidationError("Host uri_cv tidak valid")
+        if port not in (None, 443):
+            raise CVURLValidationError("Port uri_cv tidak diizinkan")
+
+        hostname = parsed_url.hostname.lower().rstrip(".")
+        configured_hosts = os.getenv(
+            "CV_ALLOWED_HOSTS",
+            DEFAULT_ALLOWED_CV_HOSTS
+        )
+        allowed_hosts = [
+            host.strip().lower().lstrip(".").rstrip(".")
+            for host in configured_hosts.split(",")
+            if host.strip()
+        ]
+        if not any(
+            hostname == allowed_host or hostname.endswith(f".{allowed_host}")
+            for allowed_host in allowed_hosts
+        ):
+            raise CVURLValidationError("Host uri_cv tidak diizinkan")
+
+        try:
+            addresses = socket.getaddrinfo(
+                hostname,
+                port or 443,
+                type=socket.SOCK_STREAM
+            )
+        except socket.gaierror as exc:
+            raise CVURLValidationError("Host uri_cv tidak dapat ditemukan") from exc
+
+        if not addresses:
+            raise CVURLValidationError("Host uri_cv tidak memiliki alamat IP")
+
+        for address in addresses:
+            ip_value = address[4][0].split("%", 1)[0]
+            if not ipaddress.ip_address(ip_value).is_global:
+                raise CVURLValidationError(
+                    "Host uri_cv mengarah ke jaringan internal"
+                )
+
+        return parsed_url.geturl()
+
+    @staticmethod
+    def _save_pdf_response(response):
+        content_length = response.headers.get("Content-Length")
+        if content_length:
+            try:
+                if int(content_length) > MAX_CV_SIZE_BYTES:
+                    raise CVDownloadError("Ukuran CV melebihi batas 10 MB")
+            except ValueError as exc:
+                raise CVDownloadError("Content-Length CV tidak valid") from exc
+
+        temp_path = None
+        total_size = 0
+        signature = bytearray()
+
+        try:
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+                temp_path = temp_file.name
+                for chunk in response.iter_content(chunk_size=64 * 1024):
+                    if not chunk:
+                        continue
+
+                    total_size += len(chunk)
+                    if total_size > MAX_CV_SIZE_BYTES:
+                        raise CVDownloadError("Ukuran CV melebihi batas 10 MB")
+
+                    if len(signature) < 5:
+                        signature.extend(chunk[:5 - len(signature)])
+                    temp_file.write(chunk)
+
+            if total_size == 0 or bytes(signature) != b"%PDF-":
+                raise CVDownloadError("File dari uri_cv bukan PDF yang valid")
+
+            return temp_path
+        except Exception:
+            if temp_path and os.path.exists(temp_path):
+                os.remove(temp_path)
+            raise
+
+    def download_cv_from_url(self, cv_url):
+        """Download CV dari URL storage yang sudah tervalidasi."""
+        self.download_error = None
+        current_url = cv_url
+
+        try:
+            for redirect_count in range(MAX_CV_REDIRECTS + 1):
+                current_url = self.validate_cv_url(current_url)
+                print(f" Downloading CV from: {current_url}")
+
+                response = requests.get(
+                    current_url,
+                    timeout=30,
+                    allow_redirects=False,
+                    stream=True
+                )
+                with response:
+                    if response.is_redirect or response.is_permanent_redirect:
+                        location = response.headers.get("Location")
+                        if not location:
+                            raise CVDownloadError(
+                                "Redirect CV tidak memiliki tujuan"
+                            )
+                        if redirect_count >= MAX_CV_REDIRECTS:
+                            raise CVDownloadError(
+                                "Redirect CV melebihi batas"
+                            )
+                        current_url = urljoin(current_url, location)
+                        continue
+
+                    response.raise_for_status()
+                    temp_path = self._save_pdf_response(response)
+                    print(f"CV downloaded to: {temp_path}")
+                    return temp_path
+
+        except CVURLValidationError as e:
+            print(f"Invalid CV URL: {e}")
+            self.download_error = {
+                'success': False,
+                'error': str(e),
+                'error_code': 'INVALID_CV_URL'
+            }
+        except (CVDownloadError, requests.exceptions.RequestException, OSError) as e:
             print(f"Error downloading CV: {e}")
-            return None
+            self.download_error = {
+                'success': False,
+                'error': 'Gagal download CV',
+                'error_code': 'DOWNLOAD_FAILED',
+                'details': str(e)
+            }
+
+        return None
     
     def extract_cv_raw_text(self, cv_path):
         """Extract raw text dari PDF"""
@@ -250,7 +389,7 @@ class CVMatchingSystem:
     def extract_skills(self, required_skills_or_job_title):
         """Extract skills dari CV"""
         text = self.cv_processed_text
-        found_skills = set()
+        found_skills = []
         
         # Jika list = required skills
         if isinstance(required_skills_or_job_title, list):
@@ -268,16 +407,33 @@ class CVMatchingSystem:
             # Exact match
             for variation in variations:
                 if variation in text_lower:
-                    found_skills.add(skill)
+                    found_skills.append(skill)
                     break
             
             # Fuzzy match
             if skill not in found_skills:
                 if self.fuzzy_match_skill(text, skill, threshold=75):
-                    found_skills.add(skill)
+                    found_skills.append(skill)
         
-        self.extracted_info['skills'] = list(found_skills)
-        return list(found_skills)
+        self.extracted_info['skills'] = found_skills
+        return found_skills
+
+    def get_target_skills(self):
+        """Ambil daftar skill pembanding dari request atau judul pekerjaan."""
+        required_skills = self.job_data.get('required_skill', [])
+        if required_skills:
+            return [
+                skill.strip()
+                for skill in required_skills
+                if isinstance(skill, str) and skill.strip()
+            ]
+
+        job_title = self.job_data.get('job_title', '').strip().lower()
+        title_skills = [
+            word for word in job_title.split()
+            if len(word) > 2
+        ]
+        return title_skills or ([job_title] if job_title else [])
     
     def extract_information(self):
         """Extract semua informasi (Nama, Kontak, Skills)"""
@@ -290,11 +446,9 @@ class CVMatchingSystem:
         print(f"  Email: {contact.get('email', 'N/A')}")
         print(f"  Phone: {contact.get('phone', 'N/A')}")
         
-        # Extract skills
-        if self.job_data.get('required_skill'):
-            skills = self.extract_skills(self.job_data['required_skill'])
-        else:
-            skills = self.extract_skills(self.job_data['job_title'])
+        # Gunakan daftar target yang sama untuk ekstraksi dan perhitungan.
+        self.target_skills = self.get_target_skills()
+        skills = self.extract_skills(self.target_skills)
         
         print(f"  Skills: {', '.join(skills) if skills else 'None'}")
     
@@ -303,21 +457,14 @@ class CVMatchingSystem:
         print("\n Skill matching...")
         
         cv_skills = self.extracted_info['skills']
-        required_skills = self.job_data.get('required_skill', [])
-        job_title = self.job_data.get('job_title', '')
-        
-        matched_skills = []
-        
-        if required_skills:
-            # Match dengan required skills
-            for skill in cv_skills:
-                if skill in required_skills:
-                    matched_skills.append(skill)
-            total_required = len(required_skills)
-        else:
-            # Match dengan job title
-            matched_skills = cv_skills
-            total_required = 1
+        if not self.target_skills:
+            self.target_skills = self.get_target_skills()
+
+        matched_skills = [
+            skill for skill in cv_skills
+            if skill in self.target_skills
+        ]
+        total_required = len(self.target_skills)
         
         self.match_result = {
             'match_count': len(matched_skills),
@@ -329,7 +476,10 @@ class CVMatchingSystem:
     
     def calculate_percentage(self):
         """Calculate percentage"""
-        if self.match_result['match_count'] > 0:
+        if (
+            self.match_result['match_count'] > 0
+            and self.match_result['total_required'] > 0
+        ):
             percentage = (self.match_result['match_count'] / 
                          self.match_result['total_required']) * 100
             return round(percentage, 2)
@@ -347,12 +497,18 @@ class CVMatchingSystem:
             percentage = self.calculate_percentage()
             response_data.update({
                 'skill': self.extracted_info['skills'],
-                'skill_required': self.job_data.get('required_skill', [self.job_data.get('job_title')]),
+                'skill_required': self.target_skills,
                 'status': 'RECOMMENDED',
                 'persentase': f"{percentage}%"
             })
             print(f"\nStatus: RECOMMENDED ({percentage}%)")
         else:
+            response_data.update({
+                'skill': [],
+                'skill_required': self.target_skills,
+                'status': 'NOT_RECOMMENDED',
+                'persentase': "0%"
+            })
             print(f"\nStatus: NOT RECOMMENDED")
         
         return response_data
@@ -380,7 +536,7 @@ class CVMatchingSystem:
         # Step 1: Download CV
         cv_path = self.download_cv_from_url(cv_url)
         if not cv_path:
-            return {
+            return self.download_error or {
                 'success': False,
                 'error': 'Gagal download CV',
                 'error_code': 'DOWNLOAD_FAILED'
@@ -445,7 +601,7 @@ def health():
     """Health check endpoint"""
     return jsonify({
         'status': 'healthy',
-        'spacy_model': 'loaded' if nlp else 'not loaded'
+        'name_extractor': 'regex'
     })
 
 @app.route('/api/match', methods=['POST'])
@@ -499,12 +655,33 @@ def match_cv():
                 'error': 'job_title is required',
                 'error_code': 'MISSING_JOB_TITLE'
             }), 400
+
+        if not isinstance(data.get('job_title'), str) or not data['job_title'].strip():
+            return jsonify({
+                'success': False,
+                'error': 'job_title must be a non-empty string',
+                'error_code': 'INVALID_JOB_TITLE'
+            }), 400
+
+        required_skills = data.get('required_skill', [])
+        if (
+            not isinstance(required_skills, list)
+            or any(
+                not isinstance(skill, str) or not skill.strip()
+                for skill in required_skills
+            )
+        ):
+            return jsonify({
+                'success': False,
+                'error': 'required_skill must be a list of non-empty strings',
+                'error_code': 'INVALID_REQUIRED_SKILL'
+            }), 400
         
         # Extract data
         cv_url = data.get('uri_cv')
         job_data = {
-            'job_title': data.get('job_title'),
-            'required_skill': data.get('required_skill', [])
+            'job_title': data['job_title'].strip(),
+            'required_skill': [skill.strip() for skill in required_skills]
         }
         
         # Process CV
