@@ -20,7 +20,7 @@ CORS(app, resources={
     r"/api/*": {
         "origins": [
             "http://localhost:3000",  # Local development
-            "https://kerjasimpel.vercel.app",   # Vercel deployments
+            "https://prototypesiapkerja.vercel.app",   # Vercel deployments
         ],
         "methods": ["GET", "POST"],
         "allow_headers": ["Content-Type"]
@@ -54,21 +54,12 @@ class CVMatchingSystem:
         
         # Synonym mapping
         self.skill_synonyms = {
-            'python': ['python', 'py', 'python3', 'python programming'],
-            'javascript': ['javascript', 'js', 'ecmascript', 'node.js', 'nodejs', 'node'],
-            'react': ['react', 'reactjs', 'react.js', 'react native'],
-            'sql': ['sql', 'mysql', 'postgresql', 'postgres', 'database', 'oracle'],
-            'java': ['java', 'javase', 'javaee', 'java programming'],
-            'css': ['css', 'css3', 'styling', 'stylesheet'],
-            'html': ['html', 'html5', 'markup'],
-            'git': ['git', 'github', 'gitlab', 'version control', 'bitbucket'],
-            'docker': ['docker', 'containerization', 'container'],
-            'api': ['api', 'rest api', 'restful', 'rest'],
             'excel': ['excel', 'microsoft excel', 'ms excel', 'spreadsheet'],
             'leadership': ['leadership', 'team leadership', 'people management', 'team lead'],
             'quality control': ['qc', 'quality control', 'quality assurance', 'qa', 'quality inspector'],
             'operator': ['operator', 'machine operator', 'production operator'],
             'sablon': ['sablon', 'screen printing', 'printing'],
+            'ppic': ['ppic','production planning','production planner','production scheduling','production control','inventory control','material planning','material requirement planning','mrp'],
         }
     
     @staticmethod
@@ -734,9 +725,9 @@ def match_cv():
     Response:
     {
         "success": true,
-        "nama": "John Doe",
+        "nama": "Ade Rama",
         "kontak": {
-            "email": "john@example.com",
+            "email": "aderama@example.com",
             "phone": "0821-xxxx-xxxx"
         },
         "skill": ["operator", "sablon"],

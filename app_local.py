@@ -8,7 +8,8 @@ from rapidfuzz import fuzz
 # CV MATCHING SYSTEM CLASS (Local Testing)
 # ============================================
 class CVMatchingSystem:
-    def __init__(self):
+    def __init__(self, fuzzy_threshold=75):
+        self.fuzzy_threshold = fuzzy_threshold
         self.cv_raw_text = ""
         self.cv_processed_text = ""
         self.job_data = {}
@@ -17,19 +18,10 @@ class CVMatchingSystem:
         
         # Synonym mapping
         self.skill_synonyms = {
-            'python': ['python', 'py', 'python3', 'python programming'],
-            'javascript': ['javascript', 'js', 'ecmascript', 'node.js', 'nodejs', 'node'],
-            'react': ['react', 'reactjs', 'react.js', 'react native'],
-            'sql': ['sql', 'mysql', 'postgresql', 'postgres', 'database', 'oracle'],
-            'java': ['java', 'javase', 'javaee', 'java programming'],
-            'css': ['css', 'css3', 'styling', 'stylesheet'],
-            'html': ['html', 'html5', 'markup'],
-            'git': ['git', 'github', 'gitlab', 'version control', 'bitbucket'],
-            'docker': ['docker', 'containerization', 'container'],
-            'api': ['api', 'rest api', 'restful', 'rest'],
             'excel': ['excel', 'microsoft excel', 'ms excel', 'spreadsheet'],
+            'ppic': ['ppic', 'production planning', 'inventory control', 'planning control', 'production control', 'material planning'],
             'leadership': ['leadership', 'team leadership', 'people management', 'team lead'],
-            'quality control': ['qc', 'quality control', 'quality assurance', 'qa', 'quality inspector'],
+            'quality control': ['qc', 'quality control', 'quality assurance', 'qa', 'quality inspector', 'quality checker'],
             'operator': ['operator', 'machine operator', 'production operator'],
             'sablon': ['sablon', 'screen printing', 'printing'],
         }
@@ -81,10 +73,147 @@ class CVMatchingSystem:
         self.cv_processed_text = text.strip()
         print(f"✓ Pre-processing done ({len(self.cv_processed_text)} karakter)")
         return self.cv_processed_text
+
+    @staticmethod
+    def normalize_name_candidate(value):
+        """Rapikan kandidat nama tanpa mengubah kapitalisasinya."""
+        value = value.replace('‘', '').replace('’', '')
+        value = value.replace('“', '').replace('”', '')
+        value = re.sub(r'[\[\]\(\)\{\}]', '', value)
+        value = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', value)
+        return re.sub(r'\s+', ' ', value).strip(" \t:-|")
+
+    @staticmethod
+    def strip_trailing_contact_fragment(value):
+        """Hapus fragmen nomor telepon yang menempel di belakang nama."""
+        return re.sub(
+            r'\s+(?:\+?62[-\s]?)?0?\d[\d\-\s]{7,}$',
+            '',
+            value
+        ).strip()
+
+    def is_valid_name_candidate(
+        self,
+        value,
+        allow_single_word=False,
+        require_name_case=True
+    ):
+        """Validasi kandidat nama dan tolak headline/section CV."""
+        candidate = self.normalize_name_candidate(value)
+        words = candidate.split()
+        min_words = 1 if allow_single_word else 2
+
+        if not min_words <= len(words) <= 5:
+            return False
+        if len(candidate) > 60:
+            return False
+        if re.search(r'\d|@|https?://|www\.', candidate, re.IGNORECASE):
+            return False
+        if any(
+            not (
+                character.isalpha()
+                or character.isspace()
+                or character in ".'-"
+            )
+            for character in candidate
+        ):
+            return False
+        if require_name_case and not (
+            candidate.isupper() or candidate.istitle()
+        ):
+            return False
+
+        blocked_phrases = {
+            'curriculum vitae',
+            'daftar riwayat hidup',
+            'fresh graduate',
+            'lulusan baru',
+            'personal profile',
+            'profil pribadi',
+            'tentang saya',
+        }
+        blocked_words = {
+            'about', 'address', 'alamat', 'baru', 'contact', 'curriculum',
+            'data', 'developer', 'di', 'education', 'email', 'engineer',
+            'experience', 'fresh', 'graduate', 'hormat', 'hp', 'jalan',
+            'kab', 'kabupaten', 'kec', 'kecamatan', 'keahlian', 'kelurahan',
+            'kontak', 'lahir', 'lulusan', 'manager', 'mobile', 'nomor',
+            'objective', 'operator', 'phone', 'pimpinan', 'pendidikan',
+            'pengalaman', 'personal', 'phone', 'pribadi', 'profile', 'profil',
+            'provinsi', 'resume', 'rt', 'rw', 'skill', 'staff', 'summary',
+            'telp', 'telepon', 'tanggal', 'tempat', 'tentang', 'vitae', 'wa',
+            'whatsapp', 'ds', 'desa', 'dusun', 'blok',
+        }
+        normalized_words = {
+            word.lower().strip(".'-") for word in words
+        }
+
+        if candidate.lower() in blocked_phrases:
+            return False
+        if normalized_words & blocked_words:
+            return False
+
+        return True
+
+    def extract_labeled_name(self, lines):
+        """Prioritaskan nama dari field eksplisit seperti 'Nama: ...'."""
+        label_pattern = re.compile(
+            r'^(?:nama(?:\s+lengkap)?|name)\s*[:\-]\s*(.+)$',
+            re.IGNORECASE
+        )
+
+        for line in lines[:30]:
+            match = label_pattern.match(line.strip())
+            if not match:
+                continue
+
+            candidate = self.normalize_name_candidate(match.group(1))
+            if self.is_valid_name_candidate(
+                candidate,
+                allow_single_word=True,
+                require_name_case=False
+            ):
+                return candidate
+
+        return None
+
+    def extract_split_header_name(self, lines):
+        """Gabungkan nama header yang diekstrak menjadi beberapa baris."""
+        header_lines = [line.strip() for line in lines[:8] if line.strip()]
+
+        for start_index in range(min(5, len(header_lines))):
+            name_parts = []
+
+            for line in header_lines[start_index:start_index + 5]:
+                if len(line.split()) != 1:
+                    break
+                if not self.is_valid_name_candidate(
+                    line,
+                    allow_single_word=True
+                ):
+                    break
+                name_parts.append(line)
+
+            if len(name_parts) >= 2:
+                candidate = self.normalize_name_candidate(
+                    ' '.join(name_parts)
+                )
+                if self.is_valid_name_candidate(candidate):
+                    return candidate
+
+        return None
     
     def extract_name_regex(self, text):
-        """Extract nama dengan enhanced regex"""
+        """Extract nama dengan enhanced regex - multiple heuristics"""
         lines = text.split('\n')
+
+        labeled_name = self.extract_labeled_name(lines)
+        if labeled_name:
+            return labeled_name
+
+        split_header_name = self.extract_split_header_name(lines)
+        if split_header_name:
+            return split_header_name
         
         # Skip keywords yang umum di CV
         skip_keywords = [
@@ -98,7 +227,8 @@ class CVMatchingSystem:
         
         # Cek 15 baris pertama CV
         for i, line in enumerate(lines[:15]):
-            line = line.strip()
+            line = self.normalize_name_candidate(line.strip())
+            line = self.strip_trailing_contact_fragment(line)
             
             # Skip baris kosong atau terlalu pendek/panjang
             if len(line) < 5 or len(line) > 50:
@@ -119,26 +249,27 @@ class CVMatchingSystem:
             # Cek pattern nama (2-4 kata)
             words = line.split()
             if 2 <= len(words) <= 4:
-                # Harus title case atau uppercase
-                if line.isupper() or line.istitle():
-                    # Tidak boleh ada simbol aneh
-                    if not re.search(r'[|:;#$%^&*()+=\[\]{}]', line):
-                        score = 100 - i
-                        candidates.append((score, line))
+                if self.is_valid_name_candidate(line):
+                    # Score berdasarkan posisi (lebih atas = lebih prioritas)
+                    score = 100 - i
+                    candidates.append((score, line))
         
         # Return kandidat dengan score tertinggi
         if candidates:
             candidates.sort(reverse=True, key=lambda x: x[0])
-            return candidates[0][1]
+            return self.normalize_name_candidate(candidates[0][1])
         
-        # Fallback
+        # Fallback: cek 5 baris pertama saja, ambil yang uppercase/title
         for line in lines[:5]:
-            line = line.strip()
-            words = line.split()
-            if 2 <= len(words) <= 4:
-                if line.isupper() or line.istitle():
-                    if not re.search(r'\d{3,}|@', line):
-                        return line
+            line = self.strip_trailing_contact_fragment(
+                self.normalize_name_candidate(line.strip())
+            )
+            if self.is_valid_name_candidate(
+                line,
+                allow_single_word=True,
+                require_name_case=False
+            ):
+                return self.normalize_name_candidate(line)
         
         return None
     
@@ -192,15 +323,26 @@ class CVMatchingSystem:
         
         return list(set(variations))
     
-    def fuzzy_match_skill(self, cv_text, skill, threshold=75):
+    def fuzzy_match_skill(self, cv_text, skill):
         """Fuzzy matching dengan RapidFuzz"""
         cv_text_lower = cv_text.lower()
         variations = self.get_skill_variations(skill)
         
         for variation in variations:
             score = fuzz.token_set_ratio(variation, cv_text_lower)
-            if score >= threshold:
-                return True
+            if score >= self.fuzzy_threshold:
+                    print(
+                    f"[FUZZY MATCH] "
+                    f"Skill='{skill}' | "
+                    f"Variation='{variation}' | "
+                    f"Score={score}"
+                    )
+                    # tampilkan potongan CV
+                    print(
+                        f"CV Contains? "
+                        f"{variation.lower() in cv_text_lower}"
+                    )
+            return True
         
         return False
     
@@ -230,7 +372,7 @@ class CVMatchingSystem:
             
             # Fuzzy match
             if skill not in found_skills:
-                if self.fuzzy_match_skill(text, skill, threshold=75):
+                if self.fuzzy_match_skill(text, skill):
                     found_skills.add(skill)
         
         self.extracted_info['skills'] = list(found_skills)
@@ -295,18 +437,28 @@ class CVMatchingSystem:
             'nama': self.extracted_info['nama'],
             'kontak': self.extracted_info['kontak']
         }
+
+        skill_required = self.job_data.get(
+            'required_skill', [self.job_data.get('job_title')]
+        )
         
         # Jika match > 0
         if self.match_result['match_count'] > 0:
             percentage = self.calculate_percentage()
             response_data.update({
                 'skill': self.extracted_info['skills'],
-                'skill_required': self.job_data.get('required_skill', [self.job_data.get('job_title')]),
+                'skill_required': skill_required,
                 'status': 'RECOMMENDED',
                 'persentase': f"{percentage}%"
             })
             print(f"\n✅ Status: RECOMMENDED ({percentage}%)")
         else:
+            response_data.update({
+                'skill': [],
+                'skill_required': skill_required,
+                'status': 'NOT_RECOMMENDED',
+                'persentase': "0%"
+            })
             print(f"\n❌ Status: NOT RECOMMENDED")
         
         return response_data
@@ -371,15 +523,16 @@ def extract_all_skills_from_cv(cv_text):
     """
     all_possible_skills = [
         # Office
-        'excel', 'word', 'powerpoint'
+        'excel', 'word', 'powerpoint',
+        # PPIC
+        'ppic', 'production planning', 'inventory control', 'planning control', 'production control', 'material planning',
         # Design
         'photoshop', 'illustrator', 'figma', 'canva', 'coreldraw',
         # Soft skills
         'leadership', 'communication', 'teamwork',
         # Industry specific
-        'quality control', 'qc', 'qa', 'operator', 'sablon', 'printing',
-        'network', 'cisco', 'router', 'mikrotik', 'firewall',
-        'accounting', 'marketing', 'sales',
+        'quality control', 'qc', 'qa', 'quality assurance', 'quality inspector', 'quality checker',
+        'operator', 'sablon', 'printing'
     ]
     
     found = []
@@ -392,10 +545,13 @@ def extract_all_skills_from_cv(cv_text):
     return found
 
 
-def batch_process_cv(cv_folder, required_skills, max_cv=70):
-    """Process CV dalam folder - HANYA yang bisa dibaca, maksimal max_cv"""
+def batch_process_cv(cv_folder, job_data, max_cv=None, fuzzy_threshold=75):
+    """Process semua CV dalam folder; jika max_cv diisi, batasi jumlah CV unik yang diproses."""
     results = []
     skipped_files = []
+    duplicate_files = []
+    required_skills = job_data.get('required_skill', [])
+    seen_name_files = {}
     
     if not os.path.exists(cv_folder):
         print(f"❌ Folder '{cv_folder}' tidak ditemukan!")
@@ -409,21 +565,26 @@ def batch_process_cv(cv_folder, required_skills, max_cv=70):
         return [], []
     
     print(f"\n📁 Ditemukan {len(pdf_files)} file PDF")
-    print(f"🎯 Target: {max_cv} CV yang bisa dibaca")
+    target_text = "semua" if max_cv is None else str(max_cv)
+    print(f"🎯 Target: {target_text} CV yang bisa dibaca")
     print("=" * 70)
     
-    success_count = 0
+    readable_count = 0
+    processed_count = 0
     
     for i, pdf_file in enumerate(pdf_files, 1):
-        # Stop jika sudah dapat 70 CV yang valid
-        if success_count >= max_cv:
+        # Stop jika mencapai batas CV unik, bila batasnya diaktifkan
+        if max_cv is not None and processed_count >= max_cv:
             print(f"\n✅ Sudah mencapai {max_cv} CV yang valid, menghentikan proses...")
             break
         
         cv_path = os.path.join(cv_folder, pdf_file)
         print(f"\n[{i:03d}] Checking: {pdf_file}")
         
-        matcher = CVMatchingSystem()
+        matcher = CVMatchingSystem(
+            fuzzy_threshold=fuzzy_threshold
+            )
+        matcher.job_data = job_data
         
         # Cek apakah CV bisa dibaca
         if not matcher.extract_cv_raw_text(cv_path):
@@ -432,28 +593,55 @@ def batch_process_cv(cv_folder, required_skills, max_cv=70):
             continue
         
         # CV bisa dibaca - proses
-        success_count += 1
-        print(f"       ✅ Valid [{success_count}/{max_cv}]")
+        readable_count += 1
+        readable_suffix = f"/{max_cv}" if max_cv is not None else ""
+        print(f"       ✅ Valid [{readable_count}{readable_suffix}]")
         
         matcher.preprocess_text()
         nama = matcher.extract_name_regex(matcher.cv_processed_text)
+
+        name_key = (
+            matcher.normalize_name_candidate(nama).casefold()
+            if nama else ''
+        )
+        if name_key and name_key in seen_name_files:
+            duplicate_files.append({
+                'file': pdf_file,
+                'nama': nama,
+                'duplicate_of': seen_name_files[name_key],
+            })
+            print(
+                f"       ⏭️ SKIP - Duplicate name: {nama} "
+                f"(same as {seen_name_files[name_key]})"
+            )
+            continue
+        if name_key:
+            seen_name_files[name_key] = pdf_file
+
+        processed_count += 1
         matcher.extract_contact()
         email = matcher.extracted_info['kontak'].get('email')
         phone = matcher.extracted_info['kontak'].get('phone')
         detected_skills = matcher.extract_skills(required_skills)
         all_skills = extract_all_skills_from_cv(matcher.cv_processed_text)
+        matcher.skill_matching()
+        response_data = matcher.prepare_response()
+        recommendation = response_data.get('status', 'NOT_RECOMMENDED')
+        percentage = response_data.get('persentase', '0%')
         
         print(f"       Nama: {nama or 'N/A'}")
         print(f"       Detected Skills: {detected_skills}")
         print(f"       All Skills in CV: {all_skills}")
+        print(f"       Recommendation: {recommendation} ({percentage})")
         
         results.append({
-            'no': success_count, 'file': pdf_file, 'status': 'OK',
+            'no': processed_count, 'file': pdf_file, 'status': 'OK',
             'nama': nama, 'email': email, 'phone': phone,
             'detected_skills': detected_skills, 'all_skills_in_cv': all_skills,
+            'recommendation': recommendation, 'persentase': percentage,
         })
     
-    return results, skipped_files
+    return results, skipped_files, duplicate_files
 
 
 def calculate_metrics(results, required_skills):
@@ -495,9 +683,15 @@ def calculate_metrics(results, required_skills):
     }
 
 
-def save_results(results, metrics, job_data, skipped_files):
+def save_results(results, metrics, job_data, skipped_files, duplicate_files):
     """Simpan hasil ke CSV dan JSON"""
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    recommended_count = sum(
+        1 for result in results
+        if result.get('recommendation') == 'RECOMMENDED'
+    )
+    not_recommended_count = len(results) - recommended_count
+    duplicate_count = len(duplicate_files)
     
     csv_file = f'evaluation_results_{timestamp}.csv'
     with open(csv_file, 'w', newline='', encoding='utf-8') as f:
@@ -505,14 +699,25 @@ def save_results(results, metrics, job_data, skipped_files):
         w.writerow(['JOB TITLE', job_data['job_title']])
         w.writerow(['REQUIRED SKILLS', ', '.join(job_data['required_skill'])])
         w.writerow([])
-        w.writerow(['No', 'File', 'Status', 'Nama', 'Email', 'Phone', 
-                    'Detected Skills', 'All Skills in CV', 'TP', 'FP', 'FN', 'TN'])
+        w.writerow(['No', 'File', 'Status', 'Nama', 'Email', 'Phone',
+                    'Recommendation', 'Persentase', 'Detected Skills',
+                    'All Skills in CV', 'TP', 'FP', 'FN', 'TN'])
         for r in results:
             w.writerow([
                 r['no'], r['file'], r['status'], r['nama'] or '', r['email'] or '', r['phone'] or '',
+                r.get('recommendation', ''), r.get('persentase', ''),
                 ', '.join(r['detected_skills']), ', '.join(r['all_skills_in_cv']),
                 r.get('tp', ''), r.get('fp', ''), r.get('fn', ''), r.get('tn', '')
             ])
+        w.writerow([])
+        w.writerow(['SUMMARY'])
+        w.writerow(['Total CV Files', len(results) + len(skipped_files) + duplicate_count])
+        w.writerow(['Readable CV', len(results) + duplicate_count])
+        w.writerow(['Unique Processed CV', len(results)])
+        w.writerow(['Duplicate Skipped', duplicate_count])
+        w.writerow(['Invalid / Skipped CV', len(skipped_files)])
+        w.writerow(['Recommended', recommended_count])
+        w.writerow(['Not Recommended', not_recommended_count])
         w.writerow([])
         w.writerow(['METRICS'])
         w.writerow(['Accuracy', f"{metrics['accuracy']}%"])
@@ -528,15 +733,29 @@ def save_results(results, metrics, job_data, skipped_files):
             'job_data': job_data,
             'total_cv_processed': len(results),
             'total_cv_skipped': len(skipped_files),
+            'total_cv_files': len(results) + len(skipped_files) + duplicate_count,
+            'total_readable_cv': len(results) + duplicate_count,
+            'total_duplicate_skipped': duplicate_count,
+            'total_recommended': recommended_count,
+            'total_not_recommended': not_recommended_count,
             'skipped_files': skipped_files,
+            'duplicate_files': duplicate_files,
             'metrics': metrics, 
             'results': results
         }, f, indent=2, ensure_ascii=False)
     print(f"💾 JSON: {json_file}")
 
 
-def print_final_report(results, metrics, job_data, skipped_count):
+def print_final_report(results, metrics, job_data, skipped_count, duplicate_files):
     """Print laporan akhir"""
+    recommended_count = sum(
+        1 for result in results
+        if result.get('recommendation') == 'RECOMMENDED'
+    )
+    not_recommended_count = len(results) - recommended_count
+    duplicate_count = len(duplicate_files)
+    total_files = len(results) + skipped_count + duplicate_count
+    readable_count = len(results) + duplicate_count
     
     print("\n" + "=" * 70)
     print("📊 HASIL EVALUASI AKURASI".center(70))
@@ -547,8 +766,13 @@ JOB DATA:
   Required Skills       : {', '.join(job_data['required_skill'])}
 
 JUMLAH DATA:
-  CV Diproses           : {len(results)}
-  CV Dilewati (gambar)  : {skipped_count}
+    Total CV File         : {total_files}
+    Readable CV           : {readable_count}
+    Unique Processed CV   : {len(results)}
+    Duplicate Skipped     : {duplicate_count}
+    Invalid / Skipped CV  : {skipped_count}
+    Recommended           : {recommended_count}
+    Not Recommended       : {not_recommended_count}
 
 CONFUSION MATRIX:
   True Positive  (TP)   : {metrics['total_tp']}
@@ -566,10 +790,18 @@ CONFUSION MATRIX:
 ╚══════════════════════════════════════════╝
 """)
 
+    if duplicate_files:
+        print("\nDUPLICATE SKIPPED:")
+        for duplicate in duplicate_files:
+            print(
+                f"  - {duplicate['nama']} | {duplicate['file']} "
+                f"(same as {duplicate['duplicate_of']})"
+            )
+
 
 if __name__ == '__main__':
     print("\n" + "=" * 70)
-    print("🔬 EVALUASI AKURASI - BATCH 70 CV".center(70))
+    print("🔬 EVALUASI AKURASI - SEMUA CV".center(70))
     print("=" * 70)
     print(f"Waktu: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
@@ -577,14 +809,14 @@ if __name__ == '__main__':
     # KONFIGURASI
     # ========================================
     
-    # Folder berisi CV PDF (akan diambil 70 yang bisa dibaca)
+    # Folder berisi CV PDF (semua file yang bisa dibaca akan diproses)
     CV_FOLDER = "test_cv"
-    MAX_CV = 70  # Maksimal CV yang diproses
+    MAX_CV = None  # None = proses semua CV valid yang ditemukan
     
     # Data lowongan (seperti sebelumnya)
     JOB_DATA = {
-        'job_title': 'Operator Sablon',
-        'required_skill': ['Menyablon', 'Sablon Manual', 'Operator']
+        'job_title': 'QC',
+        'required_skill': ['QC', 'Quality Control']
     }
     
     print(f"\nFolder CV: {CV_FOLDER}")
@@ -596,7 +828,11 @@ if __name__ == '__main__':
     # PROSES BATCH (hanya 70 CV yang valid)
     # ========================================
     
-    results, skipped_files = batch_process_cv(CV_FOLDER, JOB_DATA['required_skill'], MAX_CV)
+    results, skipped_files, duplicate_files = batch_process_cv(
+        CV_FOLDER,
+        JOB_DATA,
+        MAX_CV
+    )
     
     if not results:
         print("\n❌ Tidak ada hasil untuk diproses")
@@ -612,8 +848,14 @@ if __name__ == '__main__':
     # PRINT & SAVE
     # ========================================
     
-    print_final_report(results, metrics, JOB_DATA, len(skipped_files))
-    save_results(results, metrics, JOB_DATA, skipped_files)
+    print_final_report(
+        results,
+        metrics,
+        JOB_DATA,
+        len(skipped_files),
+        duplicate_files
+    )
+    save_results(results, metrics, JOB_DATA, skipped_files, duplicate_files)
     
     print(f"\n📋 Total CV dilewati (format gambar): {len(skipped_files)}")
     print("\n✅ Evaluasi selesai!")

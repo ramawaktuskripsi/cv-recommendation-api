@@ -1,0 +1,1265 @@
+{
+  "timestamp": "20260613_123935",
+  "job_data": {
+    "job_title": "Operator Sablon",
+    "required_skill": [
+      "Menyablon",
+      "Sablon Manual",
+      "Operator"
+    ]
+  },
+  "total_cv_processed": 70,
+  "total_cv_skipped": 53,
+  "skipped_files": [
+    "0M9Jl3lBz9ceM6fGh8cGSOVCSvEcf7sI.pdf",
+    "29Lhp3VVg0lZZgK736eNSktKr620CySJ.pdf",
+    "5kabye9PLaOdfI8vH5PnmBgOcEKDMqkU.pdf",
+    "6PbTgGEE8zNSQ6VetRYyip2BBpME0kAO.pdf",
+    "6QWk0VmR0UsZuxnI4R7lNXkjfMxgukPA.pdf",
+    "6rds2JPNsG5Qy5MSZsUZjms3T6Os77un.pdf",
+    "7rRsaaFT7s8hoerAkehX9K8urHrBtS4L.pdf",
+    "9SgXRRtVwlJ9uRf3lYZtv9I3KTkO0oEc.pdf",
+    "AoAq9VIzSftVy2dXIQgE9b6hMqW44XI9.pdf",
+    "Ds55jWfh3KuZUSvSMWe26B7x4udHjBuq.pdf",
+    "H3FTKkr7IpgX8QtM8lluWSrwhRGTzxEk.pdf",
+    "HFhSOKINVxi5NcHv50fjJYVYwkuhopPd.pdf",
+    "HP0M9Miolsi8vp0m8V4z32VTrsP98YWo.pdf",
+    "Hysr8SiDZ9JYSKJE3X3KNd6W3g9UFuEH.pdf",
+    "KxuoGugC4N1Z4NdeJgSpN7QuIli7KcPk.pdf",
+    "N21XGTZr5b0m8xd6itW6GWZoEBxUdKYM.pdf",
+    "O8M8d5WNj3Tw3g7dUKlxEEUjK6TvCuje.pdf",
+    "OYBFOgxOGLtg9cKZVhSqwk8ziGpNZNG4.pdf",
+    "PMPA7LNUc4fKhPxnASjDivdvVfu17CvV.pdf",
+    "RhnqEALNeVYWBxmbXhQWA4QAqlvBQ6sK.pdf",
+    "SWHA8bceM181ptvAuAc7lNqQvfEgdAry.pdf",
+    "Stw5zlRBiGHYkyvFF4zstB6mntJ5P4Or.pdf",
+    "Vwo53v7Z4Tm7azkAuSrFr03F04tpwb0V.pdf",
+    "W6biVciacxigEOJMfv6e87jnA3l6N3SG.pdf",
+    "WP6N56hUOVf1WsMiuJjtb9nyQ3wSetDx.pdf",
+    "XgDH4Kr2K1bxMTYgFxQIZZ1qKDFxop0i.pdf",
+    "Xm5M45IEBb2mzc2Iy4KBAFDA4C32lCkP.pdf",
+    "YmW5T3gMP7epPAak0XsvIT7SfbiotX8o.pdf",
+    "ZiMR02GzIqPpc8dEgGo19xrBAIQI8rAm.pdf",
+    "a4Mzxo3fOijbR332bNINniyOgPskxMvi.pdf",
+    "avX16HMXCnvjan0D4WEps4CNxFe21hGu.pdf",
+    "b91Kyc0eDMR7EURaShuE8Du9Jh0CCg0V.pdf",
+    "cOPLRDGZkBoEfao1odgAIG7cFg2jhLfJ.pdf",
+    "cSGa1CaG6MpvFnMlnNtwq0JgANvXflkE.pdf",
+    "cv.pdf",
+    "ebXxrOmCZBQsQT68GfCL6ZaMhwiNcHwc.pdf",
+    "fk3M2OycOGWCHqpkmVzgW8wbNOcUCSRy.pdf",
+    "gZwGerw7cFqPqsy0hKksW09ElbR8qywq.pdf",
+    "gjy5ePDBQRW16DQ1F5u77OqZENvuioOo.pdf",
+    "hpw1WH6cae8K2O5dAs8xJsosQybCNzoc.pdf",
+    "iPE12heQ0wPetiq4eVbMs4A4qUpCVcW5.pdf",
+    "ikJn2NPZm3z2Ldzeutm89x3snVa7elIZ.pdf",
+    "k0LdY9OZNYvlwE1Cvy1aHRgao72PMKGL.pdf",
+    "kZUXg7QagenyzEyYr2B6eeylpwx8HmtH.pdf",
+    "livaNsDC6BunTvOFaOHKwZ67JwulYfAF.pdf",
+    "m6nuqO5iDrM6BjUsXbHmCHDV12OmM3eC.pdf",
+    "oHzvv5FnDb6bMg8EscaEoZ4tuxH5xsf6.pdf",
+    "pOb4h8iMDSpVz5nMREc3BIIe264DiTCR.pdf",
+    "qYj2dFZZWFyhsuY3SEQ3PDRVTqkLK1WY.pdf",
+    "qfsVJ1wRlvxf29Ynb6QktdLL8FIpWm0L.pdf",
+    "r3JeXJjcIPI4dHP63T9yJaq5nkvkS9us.pdf",
+    "r7ALK6LgoVj8Dp7wgYagFVMZQpEfreWd.pdf",
+    "rYLpPZ5rdX6F2b2Jy9yLcfznexWYP852.pdf"
+  ],
+  "metrics": {
+    "total_tp": 28,
+    "total_fp": 1,
+    "total_fn": 0,
+    "total_tn": 181,
+    "precision": 96.55,
+    "recall": 100.0,
+    "f1_score": 98.25,
+    "accuracy": 99.52
+  },
+  "results": [
+    {
+      "no": 1,
+      "file": "0JbX2Ypn92pcaJ8u1RIz8HXB2YqFSx9z.pdf",
+      "status": "OK",
+      "nama": "DIMAS ZAENUL",
+      "email": "zaenularifindimas@gmail.com",
+      "phone": "085189746426",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 2,
+      "file": "0rw4eaYmW69sjyt9ggOjYTXyYnn7SKS6.pdf",
+      "status": "OK",
+      "nama": "Lulusan Baru",
+      "email": "alifp8836@gmail.com",
+      "phone": "083146819750",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator",
+        "sablon"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 3,
+      "file": "1DBXZXeZOGCIQNqrCuDBEA0ESduES7jA.pdf",
+      "status": "OK",
+      "nama": "Data Pribadi",
+      "email": "syuha7x@gmail.com",
+      "phone": "08977000963",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "excel",
+        "word",
+        "operator",
+        "marketing",
+        "sales"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 4,
+      "file": "1sISOo5AJ31og7maqfGITIZ6ABZBaXf1.pdf",
+      "status": "OK",
+      "nama": "SITI KLODIA NENGSIH",
+      "email": "klodianengsih718@gmail.com",
+      "phone": "083897606669",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 5,
+      "file": "4M7BYtUt7cnPuFtenMf28RbPn2ly4ppy.pdf",
+      "status": "OK",
+      "nama": "CURRICULUM VITAE",
+      "email": "travelnur06@gmail.com",
+      "phone": "085946591083",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 6,
+      "file": "4YqTgj02CXxnwSNIvJqiEPbX7F19ockm.pdf",
+      "status": "OK",
+      "nama": "FAJRUL FALAH SHIDIQ",
+      "email": "fajarfalahshidiq@gmail.com",
+      "phone": "085524784445",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 7,
+      "file": "4k0rhVrnyyOjmPeqQL6TEmrlW2wdYygi.pdf",
+      "status": "OK",
+      "nama": "MAMAN HIDAYAT",
+      "email": "aidanmanagement96@gmail.com",
+      "phone": "025 0821 8486",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "leadership",
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 8,
+      "file": "6ozvKha4JV1QZZ3rZ5IyDPt76ntmp5Yo.pdf",
+      "status": "OK",
+      "nama": "[ Rafela Destiani ]",
+      "email": "rafeladestiani1812@gmail.com",
+      "phone": "+6289533636797",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "word",
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 9,
+      "file": "6uixM6iK1msspYsW42YGyytF22xCE23u.pdf",
+      "status": "OK",
+      "nama": "ESHA APRILIYANTI",
+      "email": "eshaapriliyanti5@gmail.com",
+      "phone": "023-2024 2016",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "word"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 10,
+      "file": "8W7ytHF04zyZmvidP7C0TBtWtzlctO0H.pdf",
+      "status": "OK",
+      "nama": "WINAFATIN NURAENI",
+      "email": "winafatin20@gmail.com",
+      "phone": "0831-3973-4851",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 11,
+      "file": "9p1EMgQTjTe9D1rHVgRirVGjh3VM9sJ2.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 12,
+      "file": "CV Typo Quali.pdf",
+      "status": "OK",
+      "nama": "Data Pribadi",
+      "email": "litta.arlita@gmail.com",
+      "phone": "+6283120873624",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "quality control",
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 13,
+      "file": "DFBi8CDS5tOIrcuyF7uwqezLKOPuGvjf.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 14,
+      "file": "Dw5A6BtRcpeBGOA4RiahJchIxZV6D4lQ.pdf",
+      "status": "OK",
+      "nama": "SITI NURHAYATI",
+      "email": "hayati5823877@gmail.com",
+      "phone": "083187032860",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 15,
+      "file": "E4NoCe6kFX0DL5cAtCaaB7yn14SIhedY.pdf",
+      "status": "OK",
+      "nama": "RIKI DARMAWAN",
+      "email": "rikyyydn@gmail.com",
+      "phone": "025 2018-2021",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 16,
+      "file": "E7qGQFQbIlyGzB2snu4bF9iKZgY6CiND.pdf",
+      "status": "OK",
+      "nama": "ASEP SUGIARTO",
+      "email": "sugiartoasep109@gmail.com",
+      "phone": "081-295-755",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "leadership",
+        "communication"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 17,
+      "file": "Eem8huxYRGapx9VE7AT2UGkZTM6KkrDv.pdf",
+      "status": "OK",
+      "nama": "RIFQI ‘AQIL MUBARAK",
+      "email": "rifqiaqil17@gmail.com",
+      "phone": "0895634790400",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "word",
+        "teamwork"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 18,
+      "file": "F5LfbESfKbcffqxnYkrYevgS8mwjRIBO.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 19,
+      "file": "GOkzSlz2JaVOhOeXgckvOV4PmCJWx8FV.pdf",
+      "status": "OK",
+      "nama": "KEC. GEMPOL KAB. CIREBON",
+      "email": "vindiagustin59@gmail.com",
+      "phone": "+62 896-0240-9903",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 20,
+      "file": "GjlZ5NYpKG9VjZOMik84VLSOg3iB70Ft.pdf",
+      "status": "OK",
+      "nama": "Cucu Nurhayati",
+      "email": "cucunurhayati37726@gmail.com",
+      "phone": "083157120135",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "marketing"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 21,
+      "file": "JrGLCPx3FP8fEPK7H9gqNeUN1sDu0sKG.pdf",
+      "status": "OK",
+      "nama": "ATIKAH NURFABILA",
+      "email": "nurfabila21@gmail.com",
+      "phone": "+62 895 3532 0361",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 22,
+      "file": "KpJIZdd7GT6FI2mrKVYue7WhxTtpj7cE.pdf",
+      "status": "OK",
+      "nama": "UMAR ARDIANSYAH",
+      "email": "ajaumar863@gmail.com",
+      "phone": "0838-3016-1502",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "qa"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 23,
+      "file": "LEE0TjHtVA6VCAU88Q6sI4Vc0nF2aVJK.pdf",
+      "status": "OK",
+      "nama": "YUNI YUNINGSIH",
+      "email": "yyuni6808@gmail.com",
+      "phone": "089643809287",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 24,
+      "file": "OezLN4QriafInwucsDZbG817mvC651CL.pdf",
+      "status": "OK",
+      "nama": "ZAHRA NUR APRINI",
+      "email": "zahranuraprini269@gmail.com",
+      "phone": "083878084438",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 25,
+      "file": "Ow2K7fMEalqHB59HVoBSkIRmbqK9X4QE.pdf",
+      "status": "OK",
+      "nama": "Lulusan Baru",
+      "email": "alifp8836@gmail.com",
+      "phone": "083146819750",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator",
+        "sablon"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 26,
+      "file": "Q2OPmOUP8qLDBlTMF8cDyEtszjLSGFWK.pdf",
+      "status": "OK",
+      "nama": "FITRIA RAHMANDANI",
+      "email": "fitriarahmandani7@gmail.com",
+      "phone": null,
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 27,
+      "file": "QU4CHpqM4E6EOaUsMP9X7MBD2KrGnv4c.pdf",
+      "status": "OK",
+      "nama": "AGUS PRAMANA",
+      "email": "aguspramanaa23@gmail.com",
+      "phone": "083142566248",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 28,
+      "file": "Qh0OpJlCfytWaz6u134Vkus9wncd6s4w.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 29,
+      "file": "R6ZDdrLDTUKKMNcQeAqLb4L7k6OOU8Ys.pdf",
+      "status": "OK",
+      "nama": "ZAHRA SRI RAHMAH",
+      "email": "zahrasrirahma@gmail.com",
+      "phone": "082321454263",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "excel",
+        "word",
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 30,
+      "file": "RkKH19wtgWLIqHpn8kuIgyUAhqayjzV9.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "selinaherpiyani@gmail.com",
+      "phone": "083120365023",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 31,
+      "file": "S2aFW7Yu95HsaKBYyfq7qdptM0hNpPAN.pdf",
+      "status": "OK",
+      "nama": "Asep Rosihin",
+      "email": "aseprosihin23@gmail.com",
+      "phone": "015-2018 0812",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "canva",
+        "sales"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 32,
+      "file": "TBFaMcCU6cdiHAdzIC4S2G8W9SZlK5DY.pdf",
+      "status": "OK",
+      "nama": "Bapak/Ibu Pimpinan",
+      "email": null,
+      "phone": "081312628107",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 33,
+      "file": "URDYrVRBd4jQJQ4ovSvoMT5HvJsO5g9G.pdf",
+      "status": "OK",
+      "nama": "FAQIH SAPUTRA",
+      "email": "faqihsaputra448@gmail.com",
+      "phone": "083856221035",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 34,
+      "file": "UY2h9jV1yjgHr8uZbS8edWivS35KKH4T.pdf",
+      "status": "OK",
+      "nama": "Data Pribadi",
+      "email": "syuha7x@gmail.com",
+      "phone": "0919020693000",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "excel",
+        "word",
+        "operator",
+        "marketing",
+        "sales"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 35,
+      "file": "V0zyhpidGU1QNmva9nRCVFUvOHX00vxX.pdf",
+      "status": "OK",
+      "nama": "DZIKRI RAMADHANI",
+      "email": "dzikriramadhani09@gmail.com",
+      "phone": "082115327912",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 36,
+      "file": "VGdZko4K0iziziZxBVZ2CvviwCaSYso9.pdf",
+      "status": "OK",
+      "nama": "[ALIFAH SYAROH]",
+      "email": "alifahsyaroh18@gmail.com",
+      "phone": "085722802766",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 37,
+      "file": "WBeOweoUqivCXpqOsqSK15jNnOcfM5JF.pdf",
+      "status": "OK",
+      "nama": "Siti Fauziah",
+      "email": "sitifauziah5711@gmail.com",
+      "phone": "0851-6881-6597",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 38,
+      "file": "WhpuyejxOQC7ROeh6UyeO30S0F8BLqlU.pdf",
+      "status": "OK",
+      "nama": "ZAHRA SRI RAHMAH",
+      "email": "zahrasrirahma@gmail.com",
+      "phone": "082321454263",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "excel",
+        "word",
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 39,
+      "file": "WqYyCzLTDxMZ1VQ9QpxCe1J7xBKZItEg.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": null,
+      "phone": "083181135662",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 40,
+      "file": "X1jfa21LI1ujZPLRGOtzxkGKQyirqG3q.pdf",
+      "status": "OK",
+      "nama": "Desa Jemaras Lor, Kec.",
+      "email": "msalsabilla8@gmail.com",
+      "phone": "0895-3454-8420",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "word"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 41,
+      "file": "XovUrNz9dQobRMX9GsnkWUNyqI23pyLm.pdf",
+      "status": "OK",
+      "nama": "MUHAMMAD HAIKHAL",
+      "email": "mhaikhalalb@gmail.com",
+      "phone": "083156577953",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "word"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 42,
+      "file": "YTMjwONSMHa9LjNhvAab1oUxE8ZNwI5y.pdf",
+      "status": "OK",
+      "nama": "MUHAMMAD NAUFAL IHSAN",
+      "email": "muhamadnaufal478@gmail.com",
+      "phone": "081394225893",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "word",
+        "network"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 43,
+      "file": "ZVWPKJDFmZ86VwtPIuh6IRKJoeFptCnE.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 44,
+      "file": "asyXnzmzh2rWb526lgytAJg4rgmElwDb.pdf",
+      "status": "OK",
+      "nama": "Data Diri",
+      "email": "daypego9@gmail.com",
+      "phone": "087731493582",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 45,
+      "file": "bGcnM8auQZFSMpTYS18Yt05WFdd3mslk.pdf",
+      "status": "OK",
+      "nama": "DATA PRIBADI",
+      "email": "rahmatgugun24@gmail.com",
+      "phone": "085214014739",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator",
+        "printing"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 46,
+      "file": "cpz3096LXsXwnAO7MwutGUlK23VvMtSO.pdf",
+      "status": "OK",
+      "nama": "AISYAH NURUL AGISTNA",
+      "email": "aisyahnurulagisna@gmail.com",
+      "phone": "0813-1507-6280",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "quality control",
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 47,
+      "file": "cv-non-rekomen.pdf",
+      "status": "OK",
+      "nama": "NEILA RATNA FIAINUL JAMBAK",
+      "email": "neilaratnaf@gmail.com",
+      "phone": "0822-9511-6614",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "leadership",
+        "communication",
+        "teamwork"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 48,
+      "file": "e0zFweeb5nZsBOU0xsclCrUlrOHJQAcQ.pdf",
+      "status": "OK",
+      "nama": "Brebes, Jawa Tengah.",
+      "email": "kurmila265@gmail.com",
+      "phone": "082324380847",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "excel",
+        "word",
+        "quality control"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 49,
+      "file": "fpcUNOfl5u7oF6858WNs8zGLNZHpLCkf.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "triliyani167@gmail.com",
+      "phone": "+62 831 4649 6971",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 50,
+      "file": "gK0gbRIkj5BChIJnFjzxE6F9IuoMeAeI.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "ahmadfathurrojy@gmail.com",
+      "phone": "089660172413",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 51,
+      "file": "gZgRbLZyxf5bg6kBUOCWpmKIqCchMY78.pdf",
+      "status": "OK",
+      "nama": "SARI KAMELIA",
+      "email": "solehasepanjangjaman34567@gmail.com",
+      "phone": "+62 831-4147-9010",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 52,
+      "file": "iErUFn5MwcVUCT91JwTSEnlfQZd0YR01.pdf",
+      "status": "OK",
+      "nama": "Dedi Yarmudik",
+      "email": "dedia7162@gmail.com",
+      "phone": "+6283184903013",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 53,
+      "file": "jivUml3FHcHv9F8bhyaRf6uGYrG8Wwrh.pdf",
+      "status": "OK",
+      "nama": "Tempat, Tanggal Lahir",
+      "email": "muhammadluckyhermawan1@gmail.com",
+      "phone": "083826351168",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 54,
+      "file": "kHryMYMMhCsIh2hWaOr2QUX9vepZeh9W.pdf",
+      "status": "OK",
+      "nama": "Kabupaten Cirebon",
+      "email": null,
+      "phone": "08990356644",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 55,
+      "file": "krmrqlvEsJD0d11OzIgZ2R9wQ1KwUDLJ.pdf",
+      "status": "OK",
+      "nama": "Dengan Hormat",
+      "email": null,
+      "phone": "081546756465",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 56,
+      "file": "mC1YoivcIHmcRRc1kINtbDnOADz1hLQT.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": null,
+      "phone": "083181135662",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 57,
+      "file": "mlj6bRHmJHKgXPbYRwW4ExDaZgrACRGx.pdf",
+      "status": "OK",
+      "nama": null,
+      "email": "adin71270@gmail.com",
+      "phone": "+62 822 1536 3210",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "qc",
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 58,
+      "file": "nCKRg29xTjLyCsE8xW3swBUQGcCtvj2L.pdf",
+      "status": "OK",
+      "nama": "DENI NOVIANDANI",
+      "email": "noviandanideni@gmail.com",
+      "phone": "081319640368",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 59,
+      "file": "nZCW9yGpp1J0ElLf6mxK2SxsDeL9ZhNa.pdf",
+      "status": "OK",
+      "nama": "Di Tempat",
+      "email": null,
+      "phone": "0858-6413-1172",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 60,
+      "file": "ndxdr9SZi0lSDI7uiFqXig87N49ko1hl.pdf",
+      "status": "OK",
+      "nama": "RIWAYAT HIDUP",
+      "email": "sofyancooljaz37@gmail.com",
+      "phone": "0813 1103 2124",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 61,
+      "file": "oBkLcAvzUarSiXFJW1hznbqGR08I3jIK.pdf",
+      "status": "OK",
+      "nama": "FAIQ FAUZI",
+      "email": "paikpauji@gmail.com",
+      "phone": "+62-831-8282-7181",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "word",
+        "sablon"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 62,
+      "file": "oJ37TeOhFNLaD5Q0KryHWibOTewfWIgC.pdf",
+      "status": "OK",
+      "nama": "WURI NUROHIM",
+      "email": "nurohimwuri@gmail.com",
+      "phone": "+6289652187467",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "excel",
+        "quality control",
+        "qc",
+        "operator",
+        "sales"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 63,
+      "file": "pMsRt4HykYjKfcx8mSZfxTVhZGnLA6B7.pdf",
+      "status": "OK",
+      "nama": "WURI NUROHIM",
+      "email": "nurohimwuri@gmail.com",
+      "phone": "+6289652187467",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "excel",
+        "quality control",
+        "qc",
+        "operator",
+        "sales"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 64,
+      "file": "pkDpUEnbfOzcZSZrydsLuRc0WCbOZIaa.pdf",
+      "status": "OK",
+      "nama": "MAULIDA AL VITO",
+      "email": "maulidaalvito067@gmail.com",
+      "phone": "+6283824950400",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 65,
+      "file": "r0MItkVi1rBrZfOt6GqIbWbbvEX22gRn.pdf",
+      "status": "OK",
+      "nama": "Data Pribadi",
+      "email": null,
+      "phone": "083813422961",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 66,
+      "file": "rJicYsYNRXw1o4zQSSf8bCwn3q0n3mJu.pdf",
+      "status": "OK",
+      "nama": "DE TIRTA",
+      "email": "detirtaonassis70@gmail.com",
+      "phone": "+6281321389516",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "teamwork",
+        "quality control",
+        "qc"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 67,
+      "file": "rs2hgISgkjGoaFpwWYKhZ768XfDsTucB.pdf",
+      "status": "OK",
+      "nama": "Tentang Saya",
+      "email": "tiaraaagustina333@gmail.com",
+      "phone": "+628815248981",
+      "detected_skills": [
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator"
+      ],
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "no": 68,
+      "file": "sNKXqYaSutOs8a6FZtD3c9tLlcwuHgcN.pdf",
+      "status": "OK",
+      "nama": "ELIS SETIANINGSIH",
+      "email": "elissetianingsih07@gmail.com",
+      "phone": "0896 9776 6704",
+      "detected_skills": [],
+      "all_skills_in_cv": [],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 69,
+      "file": "sTRhughGPVebDwiHAV9TOGyTFWwZzyu2.pdf",
+      "status": "OK",
+      "nama": "S Y .",
+      "email": "olief.yahya@gmail.com",
+      "phone": "0877-7966-3507",
+      "detected_skills": [],
+      "all_skills_in_cv": [
+        "teamwork"
+      ],
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 3
+    },
+    {
+      "no": 70,
+      "file": "sXpfdhOfiltD0Zjn4Id2pnjv4cgjcYBd.pdf",
+      "status": "OK",
+      "nama": "DIKRI PRIYATNO",
+      "email": "clddikry@gmail.com",
+      "phone": "085810196504",
+      "detected_skills": [
+        "Menyablon",
+        "Operator"
+      ],
+      "all_skills_in_cv": [
+        "operator",
+        "sablon",
+        "printing"
+      ],
+      "tp": 1,
+      "fp": 1,
+      "fn": 0,
+      "tn": 1
+    }
+  ]
+}
